@@ -142,7 +142,10 @@ To add a script directory, go to Raycast Settings > Extensions > + > Add Script 
 Add `.local/bin` as script directory to write scripts once that can be use in Raycast
 and in the terminal.
 
-REFS: https://github.com/raycast/script-commands
+REFS:
+
+- https://github.com/raycast/script-commands
+- (seach quicklinks) https://siboehm.com/articles/22/tools-I-like
 
 The Raycast settings are expoted in `.config/Raycast.rayconfig`, they are
 password protected.
@@ -171,7 +174,7 @@ Refs:
 
 Use 1Password to store dev secrets and SSH keys.
 
-## Refs:
+Refs:
 
 - https://developer.1password.com/
 
