@@ -7,6 +7,9 @@
   name = Giacomo Randazzo
   email = giacomoran@gmail.com
 
+[init]
+	defaultBranch = main
+
 [core]
 	editor = micro
 	pager = delta
@@ -30,3 +33,8 @@
 	cmd = code --wait $MERGED
 	colorMoved = default
 
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

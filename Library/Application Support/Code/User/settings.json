@@ -262,5 +262,7 @@
     "purescript": false
   },
   // #: Extension: Playwright
-  "playwright.reuseBrowser": true
+  "playwright.reuseBrowser": true,
+  "editor.parameterHints.cycle": false,
+  "editor.parameterHints.enabled": false
 }
