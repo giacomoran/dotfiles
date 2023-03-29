@@ -17,7 +17,7 @@
 ;; - right cmd is -space on tap
 
 (defcfg
-  input (iokit-name)
+  input (iokit-name "Apple Internal Keyboard / Trackpad")
   output (kext)
   fallthrough true
 )
