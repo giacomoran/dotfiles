@@ -178,6 +178,15 @@ Refs:
 
 - https://developer.1password.com/
 
+## Anaconda
+
+Using `miniconda`.
+
+In a project folder:
+
+- create [environment.yml](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually)
+- add to `.envrc`: `layout anaconda ./environment.yml`
+
 ## Tricks
 
 - **Download Github folders** Open in `github.dev` (navigate to the folder and press `.`).

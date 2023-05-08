@@ -62,7 +62,6 @@ if status is-interactive
     # alias find="fd"
     # alias grep="rg"
     alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-    alias python="python3"
 
     #
     # Abbreviations
@@ -111,6 +110,14 @@ if status is-interactive
 
     if test -e $ASDF_DATA_DIR/plugins/java/set-java-home.fish
         source $ASDF_DATA_DIR/plugins/java/set-java-home.fish
+    end
+
+    #
+    # Activate conda (miniconda)
+    #
+
+    if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
+        eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
     end
 
     #
