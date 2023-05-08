@@ -69,7 +69,7 @@ if status is-interactive
     #
 
     abbr --add --global gs 'git status'
-    abbr --add --global ga 'git add .'
+    abbr --add --global ga 'git add'
     abbr --add --global gc 'git commit -m'
     abbr --add --global gl 'git log'
     abbr --add --global gst 'git show-tree' # from git-extras
