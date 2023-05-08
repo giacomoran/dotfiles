@@ -194,10 +194,26 @@
   "liveshare.allowGuestTaskControl": true,
   "liveshare.languages.allowGuestCommandControl": true,
   "liveshare.allowGuestDebugControl": true,
+  // #: Extension: Explicit folding
+  "editor.foldingStrategy": "auto",
+  "editor.defaultFoldingRangeProvider": "zokugun.explicit-folding",
+  "explicitFolding.rules": {
+    "*": {
+      "separatorRegex": "(?<=^|\\s)(#:)",
+      "foldEOF": true,
+      "nested": [
+        {
+          "separatorRegex": "(?<=^|\\s)(##:)",
+          "foldEOF": true
+        }
+      ]
+    }
+  },
+
   // #: Extension: Highlight
   // https://github.com/fabiospampinato/vscode-highlight
   // https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions
-  "highlight.regexFlags": "gi",
+  "highlight.regexFlags": "gm",
   "highlight.regexes": {
     "([^\\w])((?:TODO|TASK):)": {
       "filterFileRegex": ".*(?<!CHANGELOG.md)$",
@@ -237,20 +253,36 @@
         }
       ]
     },
-    "[^#](#:)": {
+    "(?<=^|\\s)(#:)": {
       "decorations": {
         "isWholeLine": true,
-        "overviewRulerColor": "#e2e8f0",
-        "backgroundColor": "#e2e8f0aa",
-        "fontWeight": "bold"
+        "fontWeight": "900",
+        "borderStyle": "solid",
+        "borderWidth": "2px 0 0 0",
+        "light": {
+          "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
+          "borderColor": "#d4d4d4"
+        },
+        "dark": {
+          "overviewRulerColor": "#525252", // Tailwind Neutral 600
+          "borderColor": "#525252"
+        }
       }
-    }
-  },
-  // #: Extension: Explicit folding
-  "explicitFolding.rules": {
-    "*": {
-      "separatorRegex": "^.{0,16}#:",
-      "foldEOF": true
+    },
+    "(?<=^|\\s)(##:)": {
+      "decorations": {
+        "isWholeLine": true,
+        "borderStyle": "dashed",
+        "borderWidth": "1px 0 0 0",
+        "light": {
+          "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
+          "borderColor": "#d4d4d4"
+        },
+        "dark": {
+          "overviewRulerColor": "#525252", // Tailwind Neutral 600
+          "borderColor": "#525252"
+        }
+      }
     }
   },
   // #: Extension: Github Copilot
