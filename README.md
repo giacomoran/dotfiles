@@ -94,6 +94,9 @@ Follow guide at first link, but switch to the `keycode-refactor` branch first.
 When compiling remove `—system-ghc`.
 Make sure no karabiner items in Settings > Privacy & Security > Input Monitoring are present.
 
+The KMonad keyboard config is in `~/.config/kmonad/mbp.kbd`.
+Activate with `sudo kmonad ~/.config/kmonad/mbp.kbd`.
+
 Alternative tools to keep an eye on: [keyd](https://github.com/rvaiya/keyd), [𝑥MK](https://github.com/manna-harbour/xmk), [kanata](https://github.com/jtroo/kanata).
 
 ## Keyboard dead keys / broken `Option-*` shortcuts
@@ -132,6 +135,10 @@ REFS:
 
 Make sure you set the Homebrew path to `pam_reattach.so`.
 If you get locked out use `su -` to fix the /etc/pam.d/sudo file (might need https://support.apple.com/en-us/HT204012)
+
+NOTE:
+This is required by the Hammerspoon KMonad setup.
+After each MacOS update, the /etc/pam.d/sudo file is reset, you need to run `sudo cp /etc/pam.d/sudo{_new,}` to restore it.
 
 ## Raycast
 

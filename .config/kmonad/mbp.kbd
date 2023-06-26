@@ -81,9 +81,9 @@
   ;; oss   (tap-hold-next-release 200 @oss_ @lsft')
   ;; This tmp solution sometimes (VSCode) and sometimes does not (Finder).
   oss @oss_
-  ;; Right Cmd is Cmd-Space on tap
-  cspc_ (around rmet spc)
-  cspc  (tap-hold-next-release 200 @cspc_ @rmet')
+  ;; Left Cmd is Cmd-Space on tap
+  cspc_ (around lmet spc)
+  cspc  (tap-hold-next-release 200 @cspc_ @lmet')
 
   ;; Move to line start and move to line end
   mls   (around rmet left)
@@ -99,7 +99,7 @@
   _      _      _      _      _      _      _      _      _      _      _      _      _      _
   esc    @ctl_a @alt_s @met_d @sft_f _      _     @sft_j @met_k @alt_l @ctl_;  _      _
   @oss   _      _      _      _      _      _      _      _      _      _      @rsft' _
-  @Fn    @lctl' @lalt' @lmet'               @spc'                @cspc @ralt' _      _      _
+  @Fn    @lctl' @lalt' @cspc               @spc'                @rmet' @ralt' _      _      _
 )
 
 (deflayer function
