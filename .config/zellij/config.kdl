@@ -22,7 +22,9 @@ keybinds {
         bind "Ctrl g" { SwitchToMode "Normal"; }
     }
     resize {
-        bind "Ctrl n" { SwitchToMode "Normal"; }
+        // Map resize to `Ctrl r` instead of `Ctrl n` because `Ctrl n` is used to open a new alacritty window.
+        // bind "Ctrl n" { SwitchToMode "Normal"; }
+        bind "Ctrl r" { SwitchToMode "Normal"; }
         bind "h" "Left" { Resize "Increase Left"; }
         bind "j" "Down" { Resize "Increase Down"; }
         bind "k" "Up" { Resize "Increase Up"; }
@@ -164,7 +166,9 @@ keybinds {
         bind "Ctrl p" { SwitchToMode "Pane"; }
     }
     shared_except "resize" "locked" {
-        bind "Ctrl n" { SwitchToMode "Resize"; }
+        // Map resize to `Ctrl r` instead of `Ctrl n` because `Ctrl n` is used to open a new alacritty window.
+        // bind "Ctrl n" { SwitchToMode "Resize"; }
+        bind "Ctrl r" { SwitchToMode "Resize"; }
     }
     shared_except "scroll" "locked" {
         bind "Ctrl s" { SwitchToMode "Scroll"; }

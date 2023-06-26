@@ -125,7 +125,8 @@ if status is-interactive
     #
 
     if type -q zellij; and test $TERM = "alacritty"; and not set -q ZELLIJ
-        set ZELLIJ_AUTO_ATTACH true
+        # Turning this setting off allows opening new Alacritty window with a new Zellij session on [⌘ N].
+        # set ZELLIJ_AUTO_ATTACH true
         set ZELLIJ_AUTO_EXIT true
         eval (zellij setup --generate-auto-start fish | string collect)
     end
