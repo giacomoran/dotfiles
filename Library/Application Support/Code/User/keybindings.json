@@ -54,5 +54,15 @@
     "key": "ctrl+alt+left",
     "command": "workbench.action.moveEditorToPreviousGroup",
     "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+alt+enter",
+    "command": "github.copilot.generate",
+    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-github.copilot.generate",
+    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
   }
 ]

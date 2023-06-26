@@ -62,6 +62,9 @@
       }
     }
   },
+  "editor.parameterHints.cycle": false,
+  "editor.parameterHints.enabled": false,
+  "editor.renderWhitespace": "all",
   // #: Sidebar: Explorer
   "explorer.openEditors.visible": 0,
   "explorer.confirmDelete": false,
@@ -294,7 +297,5 @@
     "purescript": false
   },
   // #: Extension: Playwright
-  "playwright.reuseBrowser": true,
-  "editor.parameterHints.cycle": false,
-  "editor.parameterHints.enabled": false
+  "playwright.reuseBrowser": true
 }
