@@ -86,9 +86,10 @@ key_bindings:
   - { key: T, mods: Control, chars: "\x07" }
   - { key: T, mods: Control, chars: "\x14" }
   - { key: T, mods: Control, chars: "\x07" }
-  - { key: R, mods: Control, chars: "\x07" }
-  - { key: R, mods: Control, chars: "\x0E" }
-  - { key: R, mods: Control, chars: "\x07" }
+  # Resize is disable to preserve fzf.fish [⌃ R] shortcut in Zellij.
+  # - { key: R, mods: Control, chars: "\x07" }
+  # - { key: R, mods: Control, chars: "\x0E" }
+  # - { key: R, mods: Control, chars: "\x07" }
   - { key: H, mods: Control, chars: "\x07" }
   - { key: H, mods: Control, chars: "\x08" }
   - { key: H, mods: Control, chars: "\x07" }
@@ -104,7 +105,8 @@ key_bindings:
   - { key: G, mods: Command, chars: "\x07" }
   - { key: P, mods: Command, chars: "\x10" }
   - { key: T, mods: Command, chars: "\x14" }
-  - { key: R, mods: Command, chars: "\x0E" }
+  # Resize is disable to preserve fzf.fish [⌃ R] shortcut in Zellij.
+  # - { key: R, mods: Command, chars: "\x0E" }
   - { key: H, mods: Command, chars: "\x08" }
   - { key: S, mods: Command, chars: "\x13" }
   - { key: O, mods: Command, chars: "\x0F" }
