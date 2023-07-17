@@ -99,6 +99,17 @@ if status is-interactive
         source ~/.config/op/plugins.sh
     end
 
+    #
+    # Activate zellij (if zellij is available, if in alacritty and if not inside zellij already)
+    #
+
+    if type -q zellij; and test $TERM = "alacritty"; and not set -q ZELLIJ
+        # Turning this setting off allows opening new Alacritty window with a new Zellij session on [⌘ N].
+        # set ZELLIJ_AUTO_ATTACH true
+        # set ZELLIJ_AUTO_EXIT true
+        eval (zellij setup --generate-auto-start fish | string collect)
+    end
+
 
     #
     # Activate asdf
@@ -118,16 +129,5 @@ if status is-interactive
 
     if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
         eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-    end
-
-    #
-    # Activate zellij (if zellij is available, if in alacritty and if not inside zellij already)
-    #
-
-    if type -q zellij; and test $TERM = "alacritty"; and not set -q ZELLIJ
-        # Turning this setting off allows opening new Alacritty window with a new Zellij session on [⌘ N].
-        # set ZELLIJ_AUTO_ATTACH true
-        set ZELLIJ_AUTO_EXIT true
-        eval (zellij setup --generate-auto-start fish | string collect)
     end
 end
