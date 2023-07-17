@@ -114,6 +114,10 @@
   "breadcrumbs.enabled": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "search.smartCase": true,
+  "notebook.formatOnSave.enabled": true,
+  "notebook.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   // #: Lang: Plain Text
   "[plaintext]": {
     "editor.rulers": [],
@@ -173,7 +177,12 @@
   },
   // #: Lang: Python
   "[python]": {
-    "editor.formatOnType": false
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnType": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   },
   // #: Lang: Clojure
   "[clojure]": {
@@ -297,5 +306,9 @@
     "purescript": false
   },
   // #: Extension: Playwright
-  "playwright.reuseBrowser": true
+  "playwright.reuseBrowser": true,
+  // #: Extension: Pylance
+  "python.analysis.typeCheckingMode": "basic",
+  // #: Extension: isort
+  "isort.args": ["--profile", "black"]
 }

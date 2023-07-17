@@ -55,14 +55,26 @@
     "command": "workbench.action.moveEditorToPreviousGroup",
     "when": "editorFocus"
   },
+  // #: Extension: GitHub Copilot
+  // [⌃]+[⌥]+[⏎] Generate Copilot suggestions (remapped)
   {
     "key": "ctrl+alt+enter",
     "command": "github.copilot.generate",
-    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
+    "when": " github.copilot.activated && editorTextFocus && !inInteractiveInput && !interactiveEditorFocused"
   },
   {
     "key": "ctrl+enter",
     "command": "-github.copilot.generate",
-    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
+    "when": "github.copilot.activated && editorTextFocus && !inInteractiveInput && !interactiveEditorFocused"
+  },
+  // [⇧]+[⌘]+[→] Accept next word suggested by Copilot (remapped)
+  {
+    "key": "cmd+right",
+    "command": "-editor.action.inlineSuggest.acceptNextWord",
+    "when": "inlineSuggestionVisible && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+right",
+    "command": "github.copilot.activated && editor.action.inlineSuggest.acceptNextWord"
   }
 ]
