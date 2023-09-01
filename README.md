@@ -79,6 +79,8 @@ REFS:
 
 ## KMonad
 
+NOTE: For problems after MacOS updates, see the **`sudo` with TouchID** section.
+
 If KMonad freezes run the commands:
 
 ```
