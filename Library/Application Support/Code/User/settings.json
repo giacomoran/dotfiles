@@ -221,7 +221,7 @@
       ]
     }
   },
-
+  "explicitFolding.wildcardExclusions": ["markdown"],
   // #: Extension: Highlight
   // https://github.com/fabiospampinato/vscode-highlight
   // https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions
@@ -300,9 +300,10 @@
   // #: Extension: Github Copilot
   "github.copilot.enable": {
     "*": true,
-    "yaml": false,
     "plaintext": false,
     "markdown": false,
+    "scminput": false,
+    "yaml": false,
     "purescript": false
   },
   // #: Extension: Playwright
