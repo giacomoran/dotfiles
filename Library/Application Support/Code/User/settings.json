@@ -65,6 +65,7 @@
   "editor.parameterHints.cycle": false,
   "editor.parameterHints.enabled": false,
   "editor.renderWhitespace": "all",
+  "editor.stickyScroll.enabled": true,
   // #: Sidebar: Explorer
   "explorer.openEditors.visible": 0,
   "explorer.confirmDelete": false,
@@ -303,7 +304,7 @@
     "plaintext": false,
     "markdown": false,
     "scminput": false,
-    "yaml": false,
+    "yaml": true,
     "purescript": false
   },
   // #: Extension: Playwright

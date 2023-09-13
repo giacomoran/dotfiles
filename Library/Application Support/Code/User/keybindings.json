@@ -67,14 +67,14 @@
     "command": "-github.copilot.generate",
     "when": "github.copilot.activated && editorTextFocus && !inInteractiveInput && !interactiveEditorFocused"
   },
-  // [⇧]+[⌘]+[→] Accept next word suggested by Copilot (remapped)
+  // [⌃]+[→] Accept next word suggested by Copilot (remapped)
   {
     "key": "cmd+right",
     "command": "-editor.action.inlineSuggest.acceptNextWord",
     "when": "inlineSuggestionVisible && !editorReadonly"
   },
   {
-    "key": "shift+cmd+right",
+    "key": "ctrl+right",
     "command": "github.copilot.activated && editor.action.inlineSuggest.acceptNextWord"
   }
 ]
