@@ -209,7 +209,6 @@
   "liveshare.allowGuestDebugControl": true,
   // #: Extension: Explicit folding
   "editor.foldingStrategy": "auto",
-  "editor.defaultFoldingRangeProvider": "zokugun.explicit-folding",
   "explicitFolding.rules": {
     "*": {
       "separatorRegex": "(?<=^|\\s)(#:)",

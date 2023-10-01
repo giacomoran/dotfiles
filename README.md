@@ -69,8 +69,8 @@ ISSUE: `brew install qmk/qmk/qmk` is currently broken, but the workaround is to 
 The Kyria uses an Elite-PI microcontroller, running `qmk flash` will not work.
 
 ```
-qmk compile -kb kyria -km GiacomoRandazzo
-qmk flash -c -kb kyria -km GiacomoRandazzo -e CONVERT_TO=elite_pi
+qmk compile -kb splitkb/kyria/rev2 -km GiacomoRandazzo
+qmk flash -c -kb splitkb/kyria/rev2 -km GiacomoRandazzo -e CONVERT_TO=elite_pi
 ```
 
 REFS:
