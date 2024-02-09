@@ -56,11 +56,12 @@
     "when": "editorFocus"
   },
   // #: Extension: GitHub Copilot
-  // [⌃]+[⌥]+[⏎] Generate Copilot suggestions (remapped)
+  //     [⌥]+[\] Trigger Copilot suggestion
+  // [⌃]+[⌥]+[\] Open GitHub Copilot (additional suggestions in separate pane) (remapped)
   {
-    "key": "ctrl+alt+enter",
+    "key": "ctrl+alt+\\",
     "command": "github.copilot.generate",
-    "when": " github.copilot.activated && editorTextFocus && !inInteractiveInput && !interactiveEditorFocused"
+    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
   },
   {
     "key": "ctrl+enter",

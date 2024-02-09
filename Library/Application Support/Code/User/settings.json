@@ -11,17 +11,16 @@
   // #: Workbench
   "window.openFilesInNewWindow": "on",
   "window.openFoldersInNewWindow": "on",
-  "workbench.colorTheme": "Default Light+ Experimental",
   "workbench.editor.closeEmptyGroups": false,
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.editor.labelFormat": "long",
-  "workbench.editor.showTabs": false,
+  "workbench.editor.showTabs": "single",
   "workbench.editor.tabSizing": "shrink",
-  "workbench.editor.untitled.hint": "hidden",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.indent": 18,
   "workbench.tree.renderIndentGuides": "always",
+  "workbench.tree.enableStickyScroll": true,
   // #: Editor
   "editor.cursorWidth": 2,
   "editor.cursorSurroundingLines": 10,
@@ -45,11 +44,11 @@
   "editor.quickSuggestionsDelay": 3000,
   // https://code.visualstudio.com/docs/editor/intellisense#_settings
   "editor.acceptSuggestionOnCommitCharacter": false,
-  "editor.wordBasedSuggestions": false,
+  "editor.wordBasedSuggestions": "off",
   "editor.suggest.localityBonus": true,
   "editor.tabSize": 2,
   "editor.accessibilitySupport": "off",
-  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.enabled": false,
   "editor.semanticTokenColorCustomizations": {
     "[Default Light+ Experimental]": {
       "rules": {
@@ -60,6 +59,18 @@
           "italic": false
         }
       }
+    }
+  },
+  "editor.tokenColorCustomizations": {
+    "[Alabaster]": {
+      "textMateRules": [
+        {
+          "scope": "meta.template.expression",
+          "settings": {
+            "foreground": "#000"
+          }
+        }
+      ]
     }
   },
   "editor.parameterHints.cycle": false,
@@ -113,7 +124,6 @@
   // #: Misc
   "task.allowAutomaticTasks": "off",
   "breadcrumbs.enabled": true,
-  "diffEditor.ignoreTrimWhitespace": false,
   "search.smartCase": true,
   "notebook.formatOnSave.enabled": true,
   "notebook.codeActionsOnSave": {
@@ -182,7 +192,7 @@
     "editor.formatOnType": false,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": "explicit"
     }
   },
   // #: Lang: Clojure
@@ -207,27 +217,12 @@
   "liveshare.allowGuestTaskControl": true,
   "liveshare.languages.allowGuestCommandControl": true,
   "liveshare.allowGuestDebugControl": true,
-  // #: Extension: Explicit folding
-  "editor.foldingStrategy": "auto",
-  "explicitFolding.rules": {
-    "*": {
-      "separatorRegex": "(?<=^|\\s)(#:)",
-      "foldEOF": true,
-      "nested": [
-        {
-          "separatorRegex": "(?<=^|\\s)(##:)",
-          "foldEOF": true
-        }
-      ]
-    }
-  },
-  "explicitFolding.wildcardExclusions": ["markdown"],
   // #: Extension: Highlight
   // https://github.com/fabiospampinato/vscode-highlight
   // https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions
   "highlight.regexFlags": "gm",
   "highlight.regexes": {
-    "([^\\w])((?:TODO|TASK):)": {
+    "([^\\w])((?:TODO):)": {
       "filterFileRegex": ".*(?<!CHANGELOG.md)$",
       "decorations": [
         {},
@@ -300,7 +295,7 @@
   // #: Extension: Github Copilot
   "github.copilot.enable": {
     "*": true,
-    "plaintext": false,
+    "plaintext": true,
     "markdown": false,
     "scminput": false,
     "yaml": true,
@@ -311,5 +306,13 @@
   // #: Extension: Pylance
   "python.analysis.typeCheckingMode": "basic",
   // #: Extension: isort
-  "isort.args": ["--profile", "black"]
+  "isort.args": ["--profile", "black"],
+  // #: TODO: sort
+  "workbench.editor.empty.hint": "hidden",
+  "editor.guides.bracketPairs": "active",
+  "github.copilot.editor.enableAutoCompletions": false,
+  "workbench.colorTheme": "Alabaster",
+  "prettify-ts.enableHover": false,
+  "prettify-ts.viewNestedTypes": true,
+  "diffEditor.codeLens": true
 }

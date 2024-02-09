@@ -12,123 +12,20 @@
   // 	],
   // 	"description": "Log output to console"
   // }
-  "Import fp-ts pipe": {
-    "prefix": "/pipe",
-    "body": ["import { pipe } from \"fp-ts/function\";\n"]
-  },
-  "Import fp-ts flow": {
-    "prefix": "/flow",
-    "body": ["import { flow } from \"fp-ts/function\";\n"]
-  },
-  "Import fp-ts identity": {
-    "prefix": "/identity",
-    "body": ["import { identity } from \"fp-ts/function\";\n"]
-  },
-  "Import fp-ts/Identity": {
-    "prefix": "/I",
-    "body": ["import * as I from \"fp-ts/Identity\";\n"]
-  },
-  "Import fp-ts/string": {
-    "prefix": "/S",
-    "body": ["import * as S from \"fp-ts/string\";\n"]
-  },
-  "Import fp-ts/number": {
-    "prefix": "/N",
-    "body": ["import * as N from \"fp-ts/number\";\n"]
-  },
-  "Import fp-ts/Option": {
-    "prefix": "/O",
-    "body": ["import * as O from \"fp-ts/Option\";\n"]
-  },
-  "Import fp-ts/Either": {
-    "prefix": "/E",
-    "body": ["import * as E from \"fp-ts/Either\";\n"]
-  },
-  "Import fp-ts/Task": {
-    "prefix": "/T",
-    "body": ["import * as T from \"fp-ts/Task\";\n"]
-  },
-  "Import fp-ts/TaskEither": {
-    "prefix": "/TE",
-    "body": ["import * as TE from \"fp-ts/TaskEither\";\n"]
-  },
-  "Import fp-ts/Reader": {
-    "prefix": "/R",
-    "body": ["import * as R from \"fp-ts/Reader\";\n"]
-  },
-  "Import fp-ts/ReaderEither": {
-    "prefix": "/RE",
-    "body": ["import * as RE from \"fp-ts/ReaderEither\";\n"]
-  },
-  "Import fp-ts/ReaderTask": {
-    "prefix": "/RT",
-    "body": ["import * as RT from \"fp-ts/ReaderTask\";\n"]
-  },
-  "Import fp-ts/ReaderTaskEither": {
-    "prefix": "/RTE",
-    "body": ["import * as RTE from \"fp-ts/ReaderTaskEither\";\n"]
-  },
-  "Import fp-ts/ReadonlyArray": {
-    "prefix": "/RA",
-    "body": ["import * as RA from \"fp-ts/ReadonlyArray\";\n"]
-  },
-  "Import fp-ts/ReadonlyRecord": {
-    "prefix": "/RR",
-    "body": ["import * as RR from \"fp-ts/ReadonlyRecord\";\n"]
-  },
-  "Import fp-ts/ReadonlyNonEmptyArray": {
-    "prefix": "/RNEA",
-    "body": ["import * as RNEA from \"fp-ts/ReadonlyNonEmptyArray\";\n"]
-  },
-  "Import fp-ts/IO": {
-    "prefix": "/IO",
-    "body": ["import * as IO from \"fp-ts/IO\";\n"]
-  },
-  "Import fp-ts/IOE": {
-    "prefix": "/IOE",
-    "body": ["import * as IOE from \"fp-ts/IOE\";\n"]
-  },
-  "Import fp-ts/Eq": {
-    "prefix": "/Eq",
-    "body": ["import * as Eq from \"fp-ts/Eq\";\n"]
-  },
-  "Import fp-ts/Ord": {
-    "prefix": "/Ord",
-    "body": ["import * as Ord from \"fp-ts/Ord\";\n"]
-  },
-  "Import fp-ts/Semigroup": {
-    "prefix": "/Se",
-    "body": ["import * as Se from \"fp-ts/Semigroup\";\n"]
-  },
-  "Import fp-ts/Monoid": {
-    "prefix": "/Mo",
-    "body": ["import * as Mo from \"fp-ts/Monoid\";\n"]
-  },
-  "Import io-ts": {
-    "prefix": "/t",
-    "body": ["import * as t from \"io-ts\";\n"]
-  },
-  "Import io-ts/Guard": {
-    "prefix": "/ioG",
-    "body": ["import * as ioG from \"io-ts/Guard\";\n"]
-  },
-  "Import io-ts/Decoder": {
-    "prefix": "/ioD",
-    "body": ["import * as ioD from \"io-ts/Decoder\";\n"]
-  },
-  "Import io-ts/Encoder": {
-    "prefix": "/ioE",
-    "body": ["import * as ioE from \"io-ts/Encoder\";\n"]
-  },
-  "Import io-ts/Eq": {
-    "prefix": "/ioEq",
-    "body": ["import * as ioEq from \"io-ts/Eq\";\n"]
-  },
   "prettier-ignore": {
     "prefix": "/pi",
     "body": ["// prettier-ignore"]
+  }
+  "identity": {
+    "prefix": "/_",
+    "body": ["(_) => _"]
+  }
+  "console.log": {
+    "scope": "typescript,javascript,typescriptreact,javascriptreact",
+    "prefix": "/log",
+    "body": ["console.log(\"$1\", $1);$0"]
   },
-  "log and forward": {
+  "console.log pipable": {
     "prefix": "/log_",
     "body": ["(_) => {", "console.log(\"_\", _);", "return _;", "}"]
   }
