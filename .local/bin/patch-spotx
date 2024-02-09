@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# REFS: https://github.com/SpotX-Official/SpotX-Bash
+
+# `-B` disables Spotify auto-updates
+curl -sSL https://spotx-official.github.io/run.sh | bash -s -- -B
