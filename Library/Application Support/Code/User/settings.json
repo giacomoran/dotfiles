@@ -3,9 +3,15 @@
   "files.associations": {
     "*.kbd": "clojure",
     "*.fish": "shellscript",
-    "*.plist": "xml"
+    "*.plist": "xml",
+    ".env": "properties",
+    ".env.*": "properties",
+    ".tool-versions": "properties",
+    ".dockerignore": "ignore",
+    "turbo.json": "jsonc"
   },
   "files.autoSave": "onFocusChange",
+  "files.autoSaveWhenNoErrors": true,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   // #: Workbench
@@ -311,8 +317,14 @@
   "workbench.editor.empty.hint": "hidden",
   "editor.guides.bracketPairs": "active",
   "github.copilot.editor.enableAutoCompletions": false,
-  "workbench.colorTheme": "Alabaster",
   "prettify-ts.enableHover": false,
   "prettify-ts.viewNestedTypes": true,
-  "diffEditor.codeLens": true
+  "diffEditor.codeLens": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.sideBar.location": "right",
+  "animations.Install-Method": "Apc Customize UI++",
+  "update.mode": "manual",
+  "workbench.colorTheme": "Alabaster",
+  "workbench.activityBar.location": "top",
+  "git.openRepositoryInParentFolders": "always"
 }

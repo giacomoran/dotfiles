@@ -1,18 +1,18 @@
 // Place your key bindings in this file to override the defaults
 [
   // #: Editor
-  // [⌘]+[a] Expand selection
-  {
-    "key": "cmd+a",
-    "command": "editor.action.smartSelect.expand",
-    "when": "editorFocus"
-  },
-  // [⇧]+[⌘]+[a] Shrink selection
-  {
-    "key": "shift+cmd+a",
-    "command": "editor.action.smartSelect.shrink",
-    "when": "editorFocus"
-  },
+  // // [⌘]+[a] Expand selection
+  // {
+  //   "key": "cmd+a",
+  //   "command": "editor.action.smartSelect.expand",
+  //   "when": "editorFocus"
+  // },
+  // // [⇧]+[⌘]+[a] Shrink selection
+  // {
+  //   "key": "shift+cmd+a",
+  //   "command": "editor.action.smartSelect.shrink",
+  //   "when": "editorFocus"
+  // },
   // #: Group focusing and moving
   //
   // [⌥]+[⌘]+[→] Focus next group (remapped)

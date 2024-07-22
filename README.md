@@ -196,6 +196,24 @@ In a project folder:
 - create [environment.yml](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually)
 - add to `.envrc`: `layout anaconda ./environment.yml`
 
+## Postgres on MacOS
+
+- install `brew install postgresql`
+- start the service with `brew services start postgresql` (stop with `brew services stop postgresql`)
+- connect with `psql postgres`
+- list users with `\du`
+- create a user with `CREATE ROLE test WITH LOGIN PASSWORD 'testpassword';`
+- add permission to create databases `ALTER ROLE test CREATEDB;`
+- exit `\q` and login as the new user `psql postgres -U test`
+- create a database with `CREATE DATABASE test_db;`
+- grant permission to access database `GRANT ALL PRIVILEGES ON DATABASE test_db TO test; \list`
+- connect to database `\connect test_db`
+- to connect from external services use `postgresql://test:testpassword@127.0.0.1:5432/test_db`
+
+Refs:
+
+- https://www.codementor.io/@engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb
+
 ## Tricks
 
 - **Download Github folders** Open in `github.dev` (navigate to the folder and press `.`).
