@@ -54,9 +54,9 @@ if status is-interactive
     #
 
     alias which="type -a"
-    alias ls="exa --icons --across"
-    alias ll="exa --icons --long --header --git --all"
-    alias la="exa --icons --across --all"
+    alias ls="eza --icons --across"
+    alias ll="eza --icons --long --header --git --all"
+    alias la="eza --icons --across --all"
     # ISSUE: Aliasing `find` breaks `tldr`.
     # alias cat="bat"
     # alias find="fd"
