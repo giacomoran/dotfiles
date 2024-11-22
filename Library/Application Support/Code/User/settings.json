@@ -33,7 +33,7 @@
   "editor.smoothScrolling": true,
   "editor.find.addExtraSpaceOnTop": false,
   "editor.fontFamily": "'Iosevka Nerd Font', 'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-  "editor.fontSize": 14,
+  "editor.fontSize": 13,
   "editor.lineHeight": 20,
   "editor.fontLigatures": true,
   "editor.showFoldingControls": "always",
@@ -87,6 +87,7 @@
   "explorer.openEditors.visible": 0,
   "explorer.confirmDelete": false,
   "explorer.sortOrder": "foldersNestsFiles",
+  "explorer.autoReveal": false,
   // #: Sidebar: Debug
   "debug.openDebug": "openOnDebugBreak",
   "debug.showInStatusBar": "always",
@@ -192,6 +193,13 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  // #: Lang: Docker
+  "[dockerfile]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   // #: Lang: Python
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
@@ -208,6 +216,10 @@
   // #: Lang: Lua
   "[lua]": {
     "editor.defaultFormatter": "Koihik.vscode-lua-format"
+  },
+  // #: Lang: Shellscript
+  "[shellscript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   // #: Extension: GitLens
   "gitlens.codeLens.enabled": false,
@@ -321,10 +333,10 @@
   "prettify-ts.viewNestedTypes": true,
   "diffEditor.codeLens": true,
   "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.sideBar.location": "right",
   "animations.Install-Method": "Apc Customize UI++",
   "update.mode": "manual",
   "workbench.colorTheme": "Alabaster",
   "workbench.activityBar.location": "top",
-  "git.openRepositoryInParentFolders": "always"
+  "git.openRepositoryInParentFolders": "always",
+  "workbench.sideBar.location": "right"
 }
