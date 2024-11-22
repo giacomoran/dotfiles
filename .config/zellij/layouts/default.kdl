@@ -11,19 +11,22 @@ layout {
     tab name="~" focus=true {
         pane cwd="/Users/giacomoran"
     }
-    tab name="rember-root" {
+    tab name="rb #0" {
         pane cwd="/Users/giacomoran/Projects/rember-root"
     }
-    tab name="rember" {
+    tab name="rb #1" {
+        pane cwd="/Users/giacomoran/Projects/rember-root"
+    }
+    tab name="rb rember" {
         pane cwd="/Users/giacomoran/Projects/rember-root/rember"
     }
-    tab name="rember/" {
+    tab name="rb rember/" {
         pane cwd="/Users/giacomoran/Projects/rember-root/rember/packages/app-web"
     }
-    tab name="rember-community" {
+    tab name="rb rember-community" {
         pane cwd="/Users/giacomoran/Projects/rember-root/rember-community"
     }
-    tab name="rember-community/" {
+    tab name="rb rember-community/" {
         pane cwd="/Users/giacomoran/Projects/rember-root/rember-community/packages/remb"
     }
 }
