@@ -1,0 +1,8 @@
+font-family = "Iosevka Nerd Font Mono"
+font-size = 16
+macos-option-as-alt = true
+macos-titlebar-style = tabs
+window-save-state = never
+
+keybind = super+alt+right=next_tab
+keybind = super+alt+left=previous_tab
