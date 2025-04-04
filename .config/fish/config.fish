@@ -62,6 +62,7 @@ if status is-interactive
     # alias find="fd"
     # alias grep="rg"
     alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+    alias textedit='open -a TextEdit'
 
     #
     # Abbreviations
@@ -99,35 +100,43 @@ if status is-interactive
         source ~/.config/op/plugins.sh
     end
 
-    # #
-    # # Activate zellij (if zellij is available, if in alacritty and if not inside zellij already)
-    # #
+    #
+    # Source Windsurf
+    #
 
-    # if type -q zellij; and test $TERM = "alacritty"; and not set -q ZELLIJ
-    #     # Turning this setting off allows opening new Alacritty window with a new Zellij session on [⌘ N].
-    #     set ZELLIJ_AUTO_ATTACH true
-    #     # set ZELLIJ_AUTO_EXIT true
-    #     eval (zellij setup --generate-auto-start fish | string collect)
-    # end
+    fish_add_path /Users/giacomoran/.codeium/windsurf/bin
 
+    #
+    # Source OrbStack
+    #
+    source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
     #
     # Activate asdf
     #
 
-    if type -q asdf
-        source (brew --prefix asdf)/libexec/asdf.fish
-    end
+    if not set -q IN_NIX_SHELL
+        if type -q asdf
+            source (brew --prefix asdf)/libexec/asdf.fish
+        end
 
-    if test -e $ASDF_DATA_DIR/plugins/java/set-java-home.fish
-        source $ASDF_DATA_DIR/plugins/java/set-java-home.fish
+        if test -e $HOME/.asdf/plugins/java/set-java-home.fish
+            source $HOME/.asdf/plugins/java/set-java-home.fish
+        end
+
+        if test -d $HOME/.asdf/installs/rust
+            set -gx ASDF_RUST_VERSION 1.84.0
+            set -gx PATH $HOME/.asdf/installs/rust/$ASDF_RUST_VERSION/bin $PATH
+        end
     end
 
     #
     # Activate conda (miniconda)
     #
 
-    if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
-        eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+    if not set -q IN_NIX_SHELL
+        if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
+            eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+        end
     end
 end
