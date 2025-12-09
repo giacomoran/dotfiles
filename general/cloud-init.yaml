@@ -1,0 +1,47 @@
+#cloud-config
+
+#:
+
+users:
+  - name: giacomo
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys:
+      # SSH public key for tiramisu
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjL/ZlZCuKyJC345XIDkUo0/MDVvPB5McUXBjr57woa
+ssh_pwauth: false
+
+#:
+
+runcmd:
+  ##: Tailscale
+  - ["sh", "-c", "curl -fsSL https://tailscale.com/install.sh | sh"]
+  # Set sysctl settings for IP forwarding (useful when configuring an exit node)
+  - [
+      "sh",
+      "-c",
+      "echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf && echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf && sudo sysctl -p /etc/sysctl.d/99-tailscale.conf",
+    ]
+  # WARN: Generate an auth key from your Admin console https://login.tailscale.com/admin/settings/keys
+  # Option 1: Replace YOUR_AUTH_KEY_HERE below with your actual auth key
+  # Option 2: Use environment variable by replacing the line below with:
+  # - ["sh", "-c", "tailscale up --auth-key=${TAILSCALE_AUTH_KEY}"]
+  - ["tailscale", "up", "--auth-key=YOUR_AUTH_KEY_HERE"]
+  # Make this node available over Tailscale SSH
+  - ["tailscale", "set", "--ssh"]
+  ##: Run bootstrap.sh
+  # WARN: Update the script URL below if you copy this file for a different setup
+  - [
+      "sh",
+      "-c",
+      "curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/bootstrap.sh | bash",
+    ]
+
+#:
+
+final_message: |
+  cloud-init completed!
+  Version: $version
+  Timestamp: $timestamp
+  Uptime: $uptime
