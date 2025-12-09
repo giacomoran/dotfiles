@@ -3,7 +3,7 @@
 #:
 
 users:
-  - name: giacomo
+  - name: giacomoran
     groups: sudo
     shell: /bin/bash
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
@@ -35,7 +35,7 @@ runcmd:
   - [
       "sh",
       "-c",
-      "curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/bootstrap.sh | bash",
+      "curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/bootstrap.sh | su - giacomoran -c bash",
     ]
 
 #:
