@@ -16,10 +16,12 @@ add-apt-repository ppa:ubuntuhandbook1/ffmpeg7 -y
 apt update && apt install ffmpeg -y
 
 # Clone and install LeRobot
+# --upgrade-strategy only-if-needed prevents pip from replacing
+# the pre-installed PyTorch ROCm with the default CUDA version
 git clone https://github.com/huggingface/lerobot.git
 cd lerobot
 git checkout -b v0.4.1 v0.4.1
-pip install -e .
+pip install -e . --upgrade-strategy only-if-needed
 
 echo ""
 echo "LeRobot setup complete!"

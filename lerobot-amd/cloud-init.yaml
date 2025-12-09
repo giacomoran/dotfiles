@@ -4,7 +4,7 @@
 
 users:
   - name: giacomoran
-    groups: sudo
+    groups: sudo, docker
     shell: /bin/bash
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     ssh_authorized_keys:
@@ -38,4 +38,4 @@ final_message: |
   Next steps:
     1. SSH into the host
     2. Enter the container: docker exec -it rocm /bin/bash
-    3. Run: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/container-setup.sh | bash
+    3. Run: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/bootstrap-container.sh | bash
