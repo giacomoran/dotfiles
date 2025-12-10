@@ -1,5 +1,13 @@
 #cloud-config
 
+# AMD Developer Cloud setup for LeRobot training
+#
+# Prerequisites:
+#   - AMD Developer Cloud GPU Droplet
+#   - Base image: Vanilla ROCm 7.0 (provides /dev/kfd kernel driver)
+#
+# The ROCm PyTorch Docker container provides Python 3.12 + PyTorch 2.7.1
+
 #:
 
 users:
@@ -28,6 +36,7 @@ runcmd:
   - ["tailscale", "set", "--ssh"]
 
   ##: Start ROCm PyTorch container
+  - ["sh", "-c", "docker rm -f rocm 2>/dev/null || true"]
   - [
       "docker",
       "run",
