@@ -4,7 +4,7 @@
 
 users:
   - name: giacomoran
-    groups: sudo, docker
+    groups: sudo, docker, video, render
     shell: /bin/bash
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     ssh_authorized_keys:
@@ -26,6 +26,26 @@ runcmd:
   # Generate one at https://login.tailscale.com/admin/settings/keys
   - ["tailscale", "up", "--auth-key=YOUR_AUTH_KEY_HERE"]
   - ["tailscale", "set", "--ssh"]
+
+  ##: Start ROCm PyTorch container
+  - [
+      "docker",
+      "run",
+      "-d",
+      "--name=rocm",
+      "--device=/dev/kfd",
+      "--device=/dev/dri",
+      "--group-add=video",
+      "--group-add=render",
+      "--ipc=host",
+      "--shm-size=16G",
+      "--cap-add=SYS_PTRACE",
+      "--security-opt=seccomp=unconfined",
+      "-v=/home/giacomoran:/home/giacomoran",
+      "rocm/pytorch:rocm7.0_ubuntu24.04_py3.12_pytorch_release_2.7.1",
+      "sleep",
+      "infinity",
+    ]
 
 #:
 

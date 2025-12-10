@@ -5,23 +5,22 @@ set -euo pipefail
 #
 # Assumptions:
 # - Running inside the rocm Docker container (docker exec -it rocm /bin/bash)
-# - PyTorch with ROCm is pre-installed
+# - Image: rocm/pytorch:rocm7.0_ubuntu24.04_py3.12_pytorch_release_2.7.1
+# - PyTorch 2.7.1 with ROCm 7.0 is pre-installed
 #
-# Based on AMD hackathon instructions for LeRobot v0.4.1
+# Based on AMD hackathon instructions for LeRobot v0.4.2
 
 cd ~
 
-# Install ffmpeg 7.x
+# Install ffmpeg 7.x (required by LeRobot)
 add-apt-repository ppa:ubuntuhandbook1/ffmpeg7 -y
 apt update && apt install ffmpeg -y
 
 # Clone and install LeRobot
-# --upgrade-strategy only-if-needed prevents pip from replacing
-# the pre-installed PyTorch ROCm with the default CUDA version
 git clone https://github.com/huggingface/lerobot.git
 cd lerobot
-git checkout -b v0.4.1 v0.4.1
-pip install -e . --upgrade-strategy only-if-needed
+git checkout -b v0.4.2 v0.4.2
+pip install -e .
 
 echo ""
 echo "LeRobot setup complete!"
