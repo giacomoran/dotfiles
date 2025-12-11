@@ -51,6 +51,7 @@ runcmd:
       "--cap-add=SYS_PTRACE",
       "--security-opt=seccomp=unconfined",
       "-v=/home/giacomoran:/home/giacomoran",
+      "-w=/home/giacomoran",
       "rocm/pytorch:rocm7.0_ubuntu24.04_py3.12_pytorch_release_2.7.1",
       "sleep",
       "infinity",
@@ -66,5 +67,5 @@ final_message: |
 
   Next steps:
     1. SSH into the host
-    2. Enter the container: docker exec -it rocm /bin/bash
-    3. Run: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/bootstrap-container.sh | bash
+    2. Run: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/bootstrap.sh | bash
+    3. Connect to container: dtach -A /tmp/rocm docker exec -it rocm /usr/bin/fish
