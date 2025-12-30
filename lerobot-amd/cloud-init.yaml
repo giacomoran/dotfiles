@@ -67,5 +67,6 @@ final_message: |
 
   Next steps:
     1. SSH into the host
-    2. Run: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/bootstrap.sh | bash
-    3. Connect to container: dtach -A /tmp/rocm docker exec -it rocm /usr/bin/fish
+    2. Check cloud-init status: sudo tail -f /var/log/cloud-init-output.log (or use: cloud-init status --wait)
+    3. Once cloud-init completes, run: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/bootstrap.sh | bash
+    4. Connect to container: dtach -A /tmp/rocm docker exec -it rocm /usr/bin/fish
