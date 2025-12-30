@@ -50,6 +50,11 @@ if ! command -v starship &> /dev/null; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y
 fi
 
+# Install croc (file transfer tool)
+if ! command -v croc &> /dev/null; then
+    curl -sS https://getcroc.schollz.com | bash
+fi
+
 # Setup fish shell
 chsh -s /usr/bin/fish
 mkdir -p ~/.config/fish
