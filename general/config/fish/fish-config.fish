@@ -77,4 +77,9 @@ if status is-interactive
     if type -q direnv
         direnv hook fish | source
     end
+
+    # Autostart zellij if available
+    if type -q zellij
+        eval (zellij setup --generate-auto-start fish | string collect)
+    end
 end

@@ -11,7 +11,7 @@ set -euo pipefail
 
 # WARN: Update when copying this file in a different setup
 # Path to this setup's fish-config.fish in the GitHub repository
-FISH_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/fish-config.fish"
+FISH_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/config/fish/fish-config.fish"
 
 # Add eza repository (skip if already configured)
 if [ ! -f /etc/apt/keyrings/gierens.gpg ]; then
@@ -55,10 +55,31 @@ if ! command -v croc &> /dev/null; then
     curl -sS https://getcroc.schollz.com | sudo bash
 fi
 
+# Install zellij (terminal multiplexer)
+if ! command -v zellij &> /dev/null; then
+    ARCH=$(uname -m)
+    if [ "$ARCH" = "aarch64" ]; then
+        ZELLIJ_ARCH="aarch64-unknown-linux-gnu"
+    elif [ "$ARCH" = "x86_64" ]; then
+        ZELLIJ_ARCH="x86_64-unknown-linux-musl"
+    fi
+    curl -fsSL https://github.com/zellij-org/zellij/releases/latest/download/zellij-${ZELLIJ_ARCH}.tar.gz | tar -xvz && sudo mv zellij /usr/local/bin/
+fi
+
+# Install micro editor
+if ! command -v micro &> /dev/null; then
+    curl https://getmic.ro | sudo bash
+fi
+
 # Install fish shell
 sudo chsh -s /usr/bin/fish giacomoran
 mkdir -p ~/.config/fish
 curl -fsSL "$FISH_CONFIG_URL" | tee ~/.config/fish/config.fish > /dev/null
+
+# Setup zellij config
+mkdir -p ~/.config/zellij
+ZELLIJ_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/config/zellij/config.kdl"
+curl -fsSL "$ZELLIJ_CONFIG_URL" | tee ~/.config/zellij/config.kdl > /dev/null
 
 # Git config
 git config --global user.name "Giacomo Randazzo"
