@@ -66,7 +66,6 @@ if status is-interactive
     abbr --add --global gc 'git commit -m'
     abbr --add --global gl 'git log'
     abbr --add --global gst 'git show-tree' # from git-extras
-    abbr --add --global dev 'dtach -A /tmp/dev fish' # persistent session
 
     # Activate starship
     if type -q starship
@@ -76,5 +75,10 @@ if status is-interactive
     # Activate direnv
     if type -q direnv
         direnv hook fish | source
+    end
+
+    # Autostart zellij if available
+    if type -q zellij
+        eval (zellij setup --generate-auto-start fish | string collect)
     end
 end

@@ -12,6 +12,7 @@ set -euo pipefail
 # WARN: Update when copying this file in a different setup
 # Path to this setup's fish-config.fish in the GitHub repository
 FISH_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/config/fish/fish-config.fish"
+ZELLIJ_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/config/zellij/config.kdl"
 
 # Add eza repository (skip if already configured)
 if [ ! -f /etc/apt/keyrings/gierens.gpg ]; then
@@ -27,7 +28,6 @@ sudo apt-get install -y \
     build-essential \
     curl \
     direnv \
-    dtach \
     eza \
     fish \
     fzf \
@@ -63,7 +63,7 @@ if ! command -v zellij &> /dev/null; then
     elif [ "$ARCH" = "x86_64" ]; then
         ZELLIJ_ARCH="x86_64-unknown-linux-musl"
     fi
-    curl -fsSL https://github.com/zellij-org/zellij/releases/latest/download/zellij-${ZELLIJ_ARCH}.tar.gz | tar -xvz && sudo mv zellij /usr/local/bin/
+    curl -fsSL "https://github.com/zellij-org/zellij/releases/latest/download/zellij-${ZELLIJ_ARCH}.tar.gz" | tar -xvz && sudo mv zellij /usr/local/bin/
 fi
 
 # Install micro editor
@@ -78,7 +78,6 @@ curl -fsSL "$FISH_CONFIG_URL" | tee ~/.config/fish/config.fish > /dev/null
 
 # Setup zellij config
 mkdir -p ~/.config/zellij
-ZELLIJ_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/config/zellij/config.kdl"
 curl -fsSL "$ZELLIJ_CONFIG_URL" | tee ~/.config/zellij/config.kdl > /dev/null
 
 # Git config

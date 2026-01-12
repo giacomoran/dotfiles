@@ -66,7 +66,6 @@ if status is-interactive
     abbr --add --global gc 'git commit -m'
     abbr --add --global gl 'git log'
     abbr --add --global gst 'git show-tree' # from git-extras
-    abbr --add --global dev 'dtach -A /tmp/dev fish' # persistent session
 
     # Activate starship
     if type -q starship

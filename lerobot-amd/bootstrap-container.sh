@@ -11,7 +11,8 @@ set -euo pipefail
 # Based on AMD hackathon instructions for LeRobot v0.4.2
 
 # Path to this setup's fish-config.fish in the GitHub repository
-FISH_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/fish-config.fish"
+FISH_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/config/fish/fish-config.fish"
+ZELLIJ_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/config/zellij/config.kdl"
 
 cd ~
 
@@ -30,7 +31,6 @@ apt-get update
 apt-get install -y \
     bat \
     direnv \
-    dtach \
     eza \
     ffmpeg \
     fish \
@@ -55,10 +55,31 @@ if ! command -v croc &> /dev/null; then
     curl -sS https://getcroc.schollz.com | bash
 fi
 
+# Install zellij (terminal multiplexer)
+if ! command -v zellij &> /dev/null; then
+    ARCH=$(uname -m)
+    if [ "$ARCH" = "aarch64" ]; then
+        ZELLIJ_ARCH="aarch64-unknown-linux-gnu"
+    elif [ "$ARCH" = "x86_64" ]; then
+        ZELLIJ_ARCH="x86_64-unknown-linux-musl"
+    fi
+    curl -fsSL "https://github.com/zellij-org/zellij/releases/latest/download/zellij-${ZELLIJ_ARCH}.tar.gz" | tar -xvz && mv zellij /usr/local/bin/
+fi
+
+# Install micro editor
+if ! command -v micro &> /dev/null; then
+    curl https://getmic.ro | bash
+fi
+
 # Setup fish shell
 chsh -s /usr/bin/fish
 mkdir -p ~/.config/fish
 curl -fsSL "$FISH_CONFIG_URL" | tee ~/.config/fish/config.fish > /dev/null
+
+# Setup zellij config
+mkdir -p ~/.config/zellij
+ZELLIJ_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/general/config/zellij/config.kdl"
+curl -fsSL "$ZELLIJ_CONFIG_URL" | tee ~/.config/zellij/config.kdl > /dev/null
 
 # Git config
 git config --global user.name "Giacomo Randazzo"

@@ -13,10 +13,6 @@ set -euo pipefail
 # Path to bootstrap-container.sh in the GitHub repository
 BOOTSTRAP_CONTAINER_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/bootstrap-container.sh"
 
-# Install dtach on host
-sudo apt-get update
-sudo apt-get install -y dtach
-
 # Run container bootstrap inside the Docker container
 echo "Running container bootstrap..."
 docker exec rocm bash -c "curl -fsSL $BOOTSTRAP_CONTAINER_URL | bash"
@@ -25,6 +21,6 @@ echo ""
 echo "Setup complete!"
 echo ""
 echo "Connect to the container with:"
-echo "  dtach -A /tmp/rocm docker exec -it rocm /usr/bin/fish"
+echo "  docker exec -it rocm /usr/bin/fish"
 echo ""
-echo "Inside the container, use 'dev' to start a persistent dtach session."
+echo "Zellij will auto-start when fish launches."
