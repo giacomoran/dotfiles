@@ -101,12 +101,6 @@ if status is-interactive
     end
 
     #
-    # Source Windsurf
-    #
-
-    fish_add_path /Users/giacomoran/.codeium/windsurf/bin
-
-    #
     # Source OrbStack
     #
     source ~/.orbstack/shell/init2.fish 2>/dev/null || :
@@ -124,10 +118,11 @@ if status is-interactive
             source $HOME/.asdf/plugins/java/set-java-home.fish
         end
 
-        if test -d $HOME/.asdf/installs/rust
-            set -gx ASDF_RUST_VERSION 1.84.0
-            set -gx PATH $HOME/.asdf/installs/rust/$ASDF_RUST_VERSION/bin $PATH
-        end
+        # TODO: Confirm that we can remove this
+        # if test -d $HOME/.asdf/installs/rust
+        #     set -gx ASDF_RUST_VERSION 1.90.0
+        #     set -gx PATH $HOME/.asdf/installs/rust/$ASDF_RUST_VERSION/bin $PATH
+        # end
     end
 
     #
