@@ -27,6 +27,10 @@
   "workbench.tree.indent": 18,
   "workbench.tree.renderIndentGuides": "always",
   "workbench.tree.enableStickyScroll": true,
+  "workbench.iconTheme": null,
+  "workbench.colorTheme": "Alabaster",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.activityBar.location": "top",
   // #: Editor
   "editor.cursorWidth": 2,
   "editor.cursorSurroundingLines": 10,
@@ -44,8 +48,7 @@
   "editor.minimap.renderCharacters": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
-  "editor.rulers": [80],
-  "editor.codeActionsOnSave": ["source.organizeImports"],
+  "editor.rulers": [80, 120],
   "editor.inlineSuggest.enabled": true,
   "editor.quickSuggestionsDelay": 3000,
   // https://code.visualstudio.com/docs/editor/intellisense#_settings
@@ -83,8 +86,11 @@
   "editor.parameterHints.enabled": false,
   "editor.renderWhitespace": "all",
   "editor.stickyScroll.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "diffEditor.codeLens": true,
+  "diffEditor.ignoreTrimWhitespace": false,
   // #: Sidebar: Explorer
-  "explorer.openEditors.visible": 0,
+  "explorer.openEditors.visible": 1,
   "explorer.confirmDelete": false,
   "explorer.sortOrder": "foldersNestsFiles",
   "explorer.autoReveal": false,
@@ -96,7 +102,6 @@
   // #: Sidebar: Extensions
   "extensions.ignoreRecommendations": true,
   // #: Panel: Terminal
-  "terminal.external.osxExec": "Alacritty.app",
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.fontWeight": "500",
   "terminal.integrated.lineHeight": 1,
@@ -107,35 +112,11 @@
   "terminal.integrated.tabs.hideCondition": "never",
   "terminal.integrated.tabs.showActions": "always",
   "terminal.integrated.enablePersistentSessions": false,
-  // Customize terminal profiles
-  // REFS:
-  // - https://code.visualstudio.com/docs/terminal/profiles
-  // - https://george.honeywood.org.uk/blog/vs-code-and-tmux/
-  // - https://github.com/microsoft/vscode/blob/main/src/vs/platform/terminal/common/terminalPlatformConfiguration.ts
-  "terminal.integrated.profiles.osx": {
-    "bash": null,
-    "zellij": {
-      "path": "bash",
-      "args": ["-c", "zellij attach -c ${PWD##*/}"],
-      "icon": "terminal-tmux"
-    }
-  },
-  "terminal.integrated.defaultProfile.osx": "zellij",
-  // Use a POSIX-compatible shell and avoid running `config.fish` for tasks and debug
-  // https://code.visualstudio.com/docs/terminal/profiles#_configuring-the-taskdebug-profile
-  "terminal.integrated.automationProfile.osx": {
-    "path": "bash",
-    "icon": "zap",
-    "color": "terminal.ansiRed"
-  },
   // #: Misc
   "task.allowAutomaticTasks": "off",
   "breadcrumbs.enabled": true,
   "search.smartCase": true,
   "notebook.formatOnSave.enabled": true,
-  "notebook.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
   // #: Lang: Plain Text
   "[plaintext]": {
     "editor.rulers": [],
@@ -202,7 +183,7 @@
   },
   // #: Lang: Python
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnType": false,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
@@ -279,64 +260,45 @@
       ]
     },
     "(?<=^|\\s)(#:)": {
-      "decorations": {
-        "isWholeLine": true,
-        "fontWeight": "900",
-        "borderStyle": "solid",
-        "borderWidth": "2px 0 0 0",
-        "light": {
-          "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
-          "borderColor": "#d4d4d4"
-        },
-        "dark": {
-          "overviewRulerColor": "#525252", // Tailwind Neutral 600
-          "borderColor": "#525252"
+      "decorations": [
+        {
+          "isWholeLine": true,
+          "fontWeight": "900",
+          "borderStyle": "solid",
+          "borderWidth": "2px 0 0 0",
+          "light": {
+            "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
+            "borderColor": "#d4d4d4"
+          },
+          "dark": {
+            "overviewRulerColor": "#525252", // Tailwind Neutral 600
+            "borderColor": "#525252"
+          }
         }
-      }
+      ]
     },
     "(?<=^|\\s)(##:)": {
-      "decorations": {
-        "isWholeLine": true,
-        "borderStyle": "dashed",
-        "borderWidth": "1px 0 0 0",
-        "light": {
-          "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
-          "borderColor": "#d4d4d4"
-        },
-        "dark": {
-          "overviewRulerColor": "#525252", // Tailwind Neutral 600
-          "borderColor": "#525252"
+      "decorations": [
+        {
+          "isWholeLine": true,
+          "borderStyle": "dashed",
+          "borderWidth": "1px 0 0 0",
+          "light": {
+            "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
+            "borderColor": "#d4d4d4"
+          },
+          "dark": {
+            "overviewRulerColor": "#525252", // Tailwind Neutral 600
+            "borderColor": "#525252"
+          }
         }
-      }
+      ]
     }
-  },
-  // #: Extension: Github Copilot
-  "github.copilot.enable": {
-    "*": true,
-    "plaintext": true,
-    "markdown": false,
-    "scminput": false,
-    "yaml": true,
-    "purescript": false
   },
   // #: Extension: Playwright
   "playwright.reuseBrowser": true,
-  // #: Extension: Pylance
-  "python.analysis.typeCheckingMode": "basic",
-  // #: Extension: isort
-  "isort.args": ["--profile", "black"],
-  // #: TODO: sort
-  "workbench.editor.empty.hint": "hidden",
-  "editor.guides.bracketPairs": "active",
-  "github.copilot.editor.enableAutoCompletions": false,
-  "prettify-ts.enableHover": false,
-  "prettify-ts.viewNestedTypes": true,
-  "diffEditor.codeLens": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "animations.Install-Method": "Apc Customize UI++",
-  "update.mode": "manual",
-  "workbench.colorTheme": "Alabaster",
-  "workbench.activityBar.location": "top",
-  "git.openRepositoryInParentFolders": "always",
-  "workbench.sideBar.location": "right"
+  // #: Extension: Claude Code
+  "claudeCode.preferredLocation": "sidebar",
+  // #: Git
+  "git.openRepositoryInParentFolders": "always"
 }

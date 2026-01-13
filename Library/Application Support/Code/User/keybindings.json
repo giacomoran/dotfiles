@@ -55,31 +55,39 @@
     "command": "workbench.action.moveEditorToPreviousGroup",
     "when": "editorFocus"
   },
-  // #: Extension: GitHub Copilot
-  //     [⌥]+[\] Trigger Copilot suggestion
-  // [⌃]+[⌥]+[\] Open GitHub Copilot (additional suggestions in separate pane) (remapped)
-  {
-    "key": "ctrl+alt+\\",
-    "command": "github.copilot.generate",
-    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
-  },
-  {
-    "key": "ctrl+enter",
-    "command": "-github.copilot.generate",
-    "when": "github.copilot.activated && editorTextFocus && !inInteractiveInput && !interactiveEditorFocused"
-  },
-  // [⌃]+[→] Accept next word suggested by Copilot (remapped)
-  {
-    "key": "cmd+right",
-    "command": "-editor.action.inlineSuggest.acceptNextWord",
-    "when": "inlineSuggestionVisible && !editorReadonly"
-  },
-  {
-    "key": "ctrl+right",
-    "command": "github.copilot.activated && editor.action.inlineSuggest.acceptNextWord"
-  },
+  // #: Explorer
   {
     "key": "shift+cmd+b",
     "command": "workbench.files.action.showActiveFileInExplorer"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-python.execSelectionInTerminal",
+    "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python' && activeEditor != 'workbench.editor.interactive'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-python.execInREPL",
+    "when": "config.python.REPL.sendToNativeREPL && editorTextFocus && !isCompositeNotebook && !jupyter.ownsSelection && !notebookEditorFocused && editorLangId == 'python'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-python.execSelectionInTerminal",
+    "when": "editorTextFocus && !findInputFocussed && !isCompositeNotebook && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-jupyter.execSelectionInteractive",
+    "when": "editorTextFocus && isWorkspaceTrusted && jupyter.ownsSelection && !findInputFocussed && !isCompositeNotebook && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-jupyter.runcurrentcelladvance",
+    "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !isCompositeNotebook && !notebookEditorFocused"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-notebook.cell.executeAndSelectBelow",
+    "when": "notebookCellListFocused && !interactiveEditorFocused && notebookCellType == 'code' || editorTextFocus && inputFocus && notebookEditorFocused && !interactiveEditorFocused"
   }
 ]
