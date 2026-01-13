@@ -23,6 +23,10 @@ ssh_pwauth: false
 #:
 
 runcmd:
+  ##: Install dtach for persistent sessions
+  - ["apt-get", "update"]
+  - ["apt-get", "install", "-y", "dtach"]
+
   ##: Tailscale
   - ["sh", "-c", "curl -fsSL https://tailscale.com/install.sh | sh"]
   - [
