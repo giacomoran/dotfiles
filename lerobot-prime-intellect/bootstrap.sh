@@ -6,12 +6,9 @@ set -euo pipefail
 # Create a Prime Intellect template with:
 #   - Image: nvidia/cuda:12.4.1-devel-ubuntu22.04
 #   - Startup script: paste this entire file
-#   - Environment variables:
-#       TAILSCALE_AUTH_KEY  - Tailscale auth key (https://login.tailscale.com/admin/settings/keys)
-#       SSH_PUBLIC_KEY      - SSH public key (optional, has default)
 
 TARGET_USER="giacomoran"
-SSH_PUBLIC_KEY="${SSH_PUBLIC_KEY:-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjL/ZlZCuKyJC345XIDkUo0/MDVvPB5McUXBjr57woa}"
+SSH_PUBLIC_KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjL/ZlZCuKyJC345XIDkUo0/MDVvPB5McUXBjr57woa"
 
 # Path to bootstrap-user.sh in the GitHub repository
 BOOTSTRAP_USER_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-prime-intellect/bootstrap-user.sh"
@@ -29,7 +26,7 @@ echo "=== Running as root, setting up system ==="
 
 # Ensure basic tools are available
 apt-get update
-apt-get install -y curl sudo software-properties-common
+apt-get install -y curl sudo openssh-server
 
 # Create user if doesn't exist
 if ! id "$TARGET_USER" &>/dev/null; then
@@ -51,23 +48,19 @@ chmod 700 "$USER_HOME/.ssh"
 chmod 600 "$USER_HOME/.ssh/authorized_keys"
 chown -R "$TARGET_USER:$TARGET_USER" "$USER_HOME/.ssh"
 
-# Install and configure Tailscale
-if [ -n "${TAILSCALE_AUTH_KEY:-}" ]; then
-    echo "Setting up Tailscale..."
-    curl -fsSL https://tailscale.com/install.sh | sh
-    echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.d/99-tailscale.conf
-    echo 'net.ipv6.conf.all.forwarding = 1' >> /etc/sysctl.d/99-tailscale.conf
-    sysctl -p /etc/sysctl.d/99-tailscale.conf
-    tailscale up --auth-key="$TAILSCALE_AUTH_KEY"
-    tailscale set --ssh
-else
-    echo "TAILSCALE_AUTH_KEY not set, skipping Tailscale setup"
-fi
+# Configure and start SSH server
+mkdir -p /run/sshd
+sed -i 's/#PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+echo "Starting SSH server..."
+/usr/sbin/sshd
 
 echo ""
 echo "=== System setup complete ==="
 echo ""
 echo "Next steps:"
-echo "  1. SSH in: ssh $TARGET_USER@<tailscale-hostname>"
+echo "  1. SSH in: ssh $TARGET_USER@<public-ip>"
 echo "  2. Run: curl -fsSL $BOOTSTRAP_USER_URL | bash"
 echo ""
