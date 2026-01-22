@@ -78,6 +78,11 @@ if status is-interactive
         direnv hook fish | source
     end
 
+    # Auto-activate Python virtual environment if it exists
+    if test -f ~/.venv/bin/activate.fish
+        source ~/.venv/bin/activate.fish
+    end
+
     # Autostart zellij if available
     if type -q zellij
         eval (zellij setup --generate-auto-start fish | string collect)

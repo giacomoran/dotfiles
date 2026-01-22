@@ -59,6 +59,7 @@ if status is-interactive
     alias ls="eza --icons --across"
     alias ll="eza --icons --long --header --git --all"
     alias la="eza --icons --across --all"
+    alias tree="tree -I '__pycache__|node_modules|*.pyc|.git|.venv|venv|.mypy_cache|.pytest_cache|.ruff_cache|dist|build|*.egg-info|.tox|.coverage|.ipynb_checkpoints'"
 
     # Abbreviations
     abbr --add --global gs 'git status'
