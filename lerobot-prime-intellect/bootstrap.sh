@@ -32,13 +32,17 @@ apt-get install -y curl sudo openssh-server
 if ! id "$TARGET_USER" &>/dev/null; then
     echo "Creating user $TARGET_USER..."
     useradd -m -s /bin/bash "$TARGET_USER"
-    usermod -aG sudo "$TARGET_USER"
-    # Add to video/render groups only if they exist
-    getent group video &>/dev/null && usermod -aG video "$TARGET_USER"
-    getent group render &>/dev/null && usermod -aG render "$TARGET_USER"
-    echo "$TARGET_USER ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/$TARGET_USER"
-    chmod 0440 "/etc/sudoers.d/$TARGET_USER"
 fi
+
+# Always ensure sudo group and passwordless sudo (even if user exists)
+usermod -aG sudo "$TARGET_USER"
+# Add to video/render groups only if they exist
+getent group video &>/dev/null && usermod -aG video "$TARGET_USER"
+getent group render &>/dev/null && usermod -aG render "$TARGET_USER"
+
+# Setup passwordless sudo
+echo "$TARGET_USER ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/$TARGET_USER"
+chmod 0440 "/etc/sudoers.d/$TARGET_USER"
 
 # Setup SSH key
 USER_HOME="/home/$TARGET_USER"
