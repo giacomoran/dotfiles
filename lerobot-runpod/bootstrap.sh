@@ -41,9 +41,10 @@ if [ "$(id -u)" -eq 0 ]; then
     apt-get update
 
     # Add ffmpeg 7.x PPA manually (avoid add-apt-repository which breaks on RunPod containers)
-    if [ ! -f /etc/apt/sources.list.d/ffmpeg7.list ]; then
-        echo "deb https://ppa.launchpadcontent.net/ubuntuhandbook1/ffmpeg7/ubuntu jammy main" | tee /etc/apt/sources.list.d/ffmpeg7.list
-        apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A088A0E4B5E5EF30B85DC56402D87F1082C54377
+    if [ ! -f /etc/apt/keyrings/ffmpeg7.gpg ]; then
+        mkdir -p /etc/apt/keyrings
+        curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x02D87F1082C54377" | gpg --dearmor -o /etc/apt/keyrings/ffmpeg7.gpg
+        echo "deb [signed-by=/etc/apt/keyrings/ffmpeg7.gpg] https://ppa.launchpadcontent.net/ubuntuhandbook1/ffmpeg7/ubuntu jammy main" | tee /etc/apt/sources.list.d/ffmpeg7.list
     fi
 
     # Add eza repository
