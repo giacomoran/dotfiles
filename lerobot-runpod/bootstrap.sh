@@ -22,10 +22,12 @@ if [ "$(id -u)" -eq 0 ]; then
     echo "=== Creating user $USERNAME ==="
 
     if ! id "$USERNAME" &>/dev/null; then
-        useradd -m -s /usr/bin/fish -G sudo "$USERNAME"
+        useradd -m -s /bin/bash -G sudo "$USERNAME"
         echo "$USERNAME:$PASSWORD" | chpasswd
         # Allow sudo without password for convenience on ephemeral VMs
+        mkdir -p /etc/sudoers.d
         echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
+        chmod 440 /etc/sudoers.d/$USERNAME
     fi
 
     # Copy SSH keys from root to new user
@@ -70,6 +72,9 @@ if [ "$(id -u)" -eq 0 ]; then
     if command -v batcat &> /dev/null && ! command -v bat &> /dev/null; then
         ln -sf /usr/bin/batcat /usr/local/bin/bat
     fi
+
+    # Now that fish is installed, set it as the user's shell
+    chsh -s /usr/bin/fish "$USERNAME"
 
     echo "=== Installing CLI tools ==="
 
