@@ -12,22 +12,38 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 USERNAME="giacomoran"
-PASSWORD="magia"
+PUBLIC_KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjL/ZlZCuKyJC345XIDkUo0/MDVvPB5McUXBjr57woa giacomoran@gmail.com"
 
 echo "=== Creating user $USERNAME ==="
 
 if ! id "$USERNAME" &>/dev/null; then
     useradd -m -s /bin/bash -G sudo "$USERNAME"
-    echo "$USERNAME:$PASSWORD" | chpasswd
+    # Lock password (no password login)
+    passwd -l "$USERNAME"
     mkdir -p /etc/sudoers.d
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
     chmod 440 /etc/sudoers.d/$USERNAME
 fi
 
-# Copy SSH keys from root to new user
-if [ -d /root/.ssh ]; then
-    cp -r /root/.ssh /home/$USERNAME/.ssh
-    chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
+# Install only the public key for SSH access
+mkdir -p /home/$USERNAME/.ssh
+chmod 700 /home/$USERNAME/.ssh
+echo "$PUBLIC_KEY" > /home/$USERNAME/.ssh/authorized_keys
+chmod 600 /home/$USERNAME/.ssh/authorized_keys
+chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
+
+echo "=== Hardening SSH ==="
+
+# Disable root login and password authentication
+if [ -f /etc/ssh/sshd_config ]; then
+    sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+    sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+    # Restart SSH if systemd is available (may not be on RunPod containers)
+    if command -v systemctl &>/dev/null && systemctl is-active sshd &>/dev/null; then
+        systemctl restart sshd
+    elif command -v service &>/dev/null; then
+        service ssh restart 2>/dev/null || true
+    fi
 fi
 
 echo "=== Installing system packages ==="
@@ -79,7 +95,7 @@ fi
 if ! command -v zellij &> /dev/null; then
     ARCH=$(uname -m)
     case "$ARCH" in
-        aarch64) ZELLIJ_ARCH="aarch64-unknown-linux-gnu" ;;
+        aarch64) ZELLIJ_ARCH="aarch64-unknown-linux-musl" ;;
         x86_64)  ZELLIJ_ARCH="x86_64-unknown-linux-musl" ;;
         *)       echo "Unsupported architecture: $ARCH"; exit 1 ;;
     esac
@@ -94,6 +110,10 @@ if ! command -v micro &> /dev/null; then
     mv micro /usr/local/bin/
 fi
 
+echo "=== Running user setup as $USERNAME ==="
+
+su - $USERNAME -c "curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-runpod/setup-user.sh | bash"
+
 echo ""
 echo "=========================================="
 echo "Bootstrap complete!"
@@ -101,5 +121,6 @@ echo "=========================================="
 echo ""
 echo "Next steps:"
 echo "  1. Switch user: su - $USERNAME"
-echo "  2. Run user setup: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-runpod/setup-user.sh | bash"
+echo "  2. Start fish: exec fish"
+echo "  3. For LeRobot: curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-runpod/setup-lerobot.sh | bash"
 echo ""

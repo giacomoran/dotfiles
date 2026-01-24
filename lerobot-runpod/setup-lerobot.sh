@@ -50,7 +50,10 @@ pip install -e .
 
 echo "=== Initializing conda for fish shell ==="
 
-conda init fish
+# Only run conda init if not already configured (idempotent)
+if ! grep -q "conda initialize" ~/.config/fish/config.fish 2>/dev/null; then
+    conda init fish
+fi
 
 echo ""
 echo "=========================================="
