@@ -34,7 +34,7 @@ conda install -y ffmpeg=7.1.1 -c conda-forge
 
 echo "=== Installing PyTorch with CUDA ==="
 
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+pip install torch==2.7.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 
 echo "=== Cloning and installing LeRobot ==="
 
