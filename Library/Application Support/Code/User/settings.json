@@ -8,7 +8,7 @@
     ".env.*": "properties",
     ".tool-versions": "properties",
     ".dockerignore": "ignore",
-    "turbo.json": "jsonc"
+    "turbo.json": "jsonc",
   },
   "files.autoSave": "onFocusChange",
   "files.autoSaveWhenNoErrors": true,
@@ -48,7 +48,7 @@
   "editor.minimap.renderCharacters": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
-  "editor.rulers": [80, 120],
+  "editor.rulers": [80, 100, 120],
   "editor.inlineSuggest.enabled": true,
   "editor.quickSuggestionsDelay": 3000,
   // https://code.visualstudio.com/docs/editor/intellisense#_settings
@@ -62,13 +62,13 @@
     "[Default Light+ Experimental]": {
       "rules": {
         "variable.readonly": {
-          "italic": true
+          "italic": true,
         },
         "variable.local": {
-          "italic": false
-        }
-      }
-    }
+          "italic": false,
+        },
+      },
+    },
   },
   "editor.tokenColorCustomizations": {
     "[Alabaster]": {
@@ -76,11 +76,11 @@
         {
           "scope": "meta.template.expression",
           "settings": {
-            "foreground": "#000"
-          }
-        }
-      ]
-    }
+            "foreground": "#000",
+          },
+        },
+      ],
+    },
   },
   "editor.parameterHints.cycle": false,
   "editor.parameterHints.enabled": false,
@@ -120,66 +120,66 @@
   // #: Lang: Plain Text
   "[plaintext]": {
     "editor.rulers": [],
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
   },
   // #: Lang: Markdown
   "[markdown]": {
     "editor.rulers": [],
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
   },
   // #: Lang: HTML
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // #: Lang CSS
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // #: Lang: Javascript
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.format.enable": false,
   // #: Lang: Typescript
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.format.enable": false,
   // #: Lang: Svelte
   "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
+    "editor.defaultFormatter": "svelte.svelte-vscode",
   },
   "svelte.enable-ts-plugin": true,
   "svelte.plugin.svelte.defaultScriptLanguage": "ts",
   // #: Lang: JSON
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // #: Lang: YAML
   "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // #: Lang: Docker
   "[dockerfile]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[dockercompose]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // #: Lang: Python
   "[python]": {
@@ -187,20 +187,20 @@
     "editor.formatOnType": false,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    }
+      "source.organizeImports": "explicit",
+    },
   },
   // #: Lang: Clojure
   "[clojure]": {
-    "editor.defaultFormatter": "betterthantomorrow.calva"
+    "editor.defaultFormatter": "betterthantomorrow.calva",
   },
   // #: Lang: Lua
   "[lua]": {
-    "editor.defaultFormatter": "Koihik.vscode-lua-format"
+    "editor.defaultFormatter": "Koihik.vscode-lua-format",
   },
   // #: Lang: Shellscript
   "[shellscript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // #: Extension: GitLens
   "gitlens.codeLens.enabled": false,
@@ -230,9 +230,9 @@
           "backgroundColor": "#fbbf24",
           "borderRadius": "2px",
           "color": "#1f1f1f",
-          "fontWeight": "bold"
-        }
-      ]
+          "fontWeight": "bold",
+        },
+      ],
     },
     "([^\\w])((?:FIXME|FIX|BUG|HACK|WARN|UGLY|DEBUG|ISSUE):)": {
       "filterFileRegex": ".*(?<!CHANGELOG.md)$",
@@ -242,9 +242,9 @@
           "overviewRulerColor": "#f87171",
           "backgroundColor": "#f87171",
           "color": "#1f1f1f",
-          "fontWeight": "bold"
-        }
-      ]
+          "fontWeight": "bold",
+        },
+      ],
     },
     "([^\\w])((?:IDEA|NOTE|REFS):)": {
       "filterFileRegex": ".*(?<!CHANGELOG.md)$",
@@ -255,9 +255,9 @@
           "backgroundColor": "#4ade80",
           "borderRadius": "2px",
           "color": "#1f1f1f",
-          "fontWeight": "bold"
-        }
-      ]
+          "fontWeight": "bold",
+        },
+      ],
     },
     "(?<=^|\\s)(#:)": {
       "decorations": [
@@ -268,14 +268,14 @@
           "borderWidth": "2px 0 0 0",
           "light": {
             "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
-            "borderColor": "#d4d4d4"
+            "borderColor": "#d4d4d4",
           },
           "dark": {
             "overviewRulerColor": "#525252", // Tailwind Neutral 600
-            "borderColor": "#525252"
-          }
-        }
-      ]
+            "borderColor": "#525252",
+          },
+        },
+      ],
     },
     "(?<=^|\\s)(##:)": {
       "decorations": [
@@ -285,20 +285,27 @@
           "borderWidth": "1px 0 0 0",
           "light": {
             "overviewRulerColor": "#d4d4d4", // Tailwind Neutral 300
-            "borderColor": "#d4d4d4"
+            "borderColor": "#d4d4d4",
           },
           "dark": {
             "overviewRulerColor": "#525252", // Tailwind Neutral 600
-            "borderColor": "#525252"
-          }
-        }
-      ]
-    }
+            "borderColor": "#525252",
+          },
+        },
+      ],
+    },
   },
   // #: Extension: Playwright
   "playwright.reuseBrowser": true,
   // #: Extension: Claude Code
   "claudeCode.preferredLocation": "sidebar",
   // #: Git
-  "git.openRepositoryInParentFolders": "always"
+  "git.openRepositoryInParentFolders": "always",
+  "remote.SSH.configFile": "/Users/giacomoran/.ssh/config",
+  "remote.SSH.path": "/usr/bin/ssh",
+  "remote.SSH.defaultShell": "/bin/bash",
+  "remote.SSH.remotePlatform": {
+    "zeta": "linux",
+    "filipporan-pc": "linux"
+  },
 }
