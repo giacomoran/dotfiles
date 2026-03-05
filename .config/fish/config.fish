@@ -17,6 +17,9 @@ set -gx XDG_DATA_HOME   $HOME/.local/share
 set -gx XDG_STATE_HOME  $HOME/.local/state
 set -gx XDG_RUNTIME_DIR $TMPDIR
 
+# Tailscale CLI (bundled inside the macOS app)
+fish_add_path /Applications/Tailscale.app/Contents/MacOS
+
 # Set the default language
 # https://unix.stackexchange.com/q/87745
 # https://unix.stackexchange.com/q/576701
