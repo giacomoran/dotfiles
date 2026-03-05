@@ -13,11 +13,55 @@ Concrete examples collected from real projects. Append new entries as they come 
 - Counts: `cnt_reviews`, `cnt_reviews_again`, `cnt_reviews_total`
 - Timestamps: `ts_first_review_ms`, `ts_last_review_ms`
 - Dates: `date_local`, `date_first_review`
-- Paths: `path_dataset`, `path_output`, `path_parquet`
-- DataFrames: `df_reviews`, `df_cards`, `df_retention`
-- Dicts: `dict_review`
+- Paths: `path_dataset`, `path_output`, `path_parquet`, `path_model`, `path_log`, `path_difficulty`, `path_map_user`, `path_map_card`, `path_train`, `path_validation`, `path_test`, `path_embeddings`, `path_checkpoint`, `path_mapping_card`, `path_mapping_user`, `path_features`, `path_predictions_intra_day`, `path_predictions_between_days`
+- Directories: `dir_daily`, `dir_data`, `dir_results`
+- DataFrames: `df_reviews`, `df_cards`, `df_retention`, `df_feat`, `df_ret`, `df_log`, `df_features`
+- Dicts: `dict_review`, `dict_card_to_idx`, `dict_idx_to_card`, `dict_ts_to_row`
+- Arrays: `array_feats`, `array_ret`, `arr_acc_card`
+- Counts: `cnt_train`, `cnt_validation`, `cnt_test`, `cnt_samples`, `cnt_correct`, `cnt_batch`
+- Indices: `idx_row`, `idx_batch_start`, `idx_card_ret`, `indices_row`, `indices_retrieval`
+- Dimensions: `dim_input`, `dim_embed`, `dim_slot`
+- Means/stats: `mean_feature`, `std_feature`, `var_feature`, `mean_pop_train`, `sums_feature`, `sums_sq_feature`
+- Embeddings: `embeddings_card`, `embeds_user`, `embeds_ret`
+- Masks: `mask_nan_4`, `mask_padding`
+- Sets: `set_users`, `set_ts`
+- Files: `files_between_days`
+- Mappings: `map_user`, `mapping_card`
+- Permutations: `perm_user`
+- Accumulated lists: `probs_all_intra_day`, `probs_all_between_days`, `probs_list_validation`, `labels_list_validation`
+- Accumulated scalars: `loss_total`, `loss_total_validation`, `cnt_correct_validation`, `cnt_validation`
+- Per-epoch metrics: `loss_train`, `acc_train`, `loss_validation`, `acc_validation`, `auc_validation`
 - Intervals: `interval_days`, `interval_ms`
 - Booleans: `is_suspended`, `is_first_review`
+
+**Snakemake param keys (same noun-first rule applies):**
+- `dir_daily` not `daily_dir` — directory of per-user daily parquets
+- `dir_data` not `data_dir` — directory of analysis-internal data files
+- `dir_results` not `results_dir` — directory of analysis results
+- `path_output` not `output_path` — output file path (when assigned from `snakemake.output.*`)
+
+**ML model constant naming:**
+- `FEATURE_COLS_USER` not `USER_FEATURE_COLS` — qualifier after noun
+- `COLS_POST_REVIEW` not `POST_REVIEW_COLS` — qualifier after noun
+
+**ML function naming (verb-first, then result-type noun, then qualifiers):**
+- `get_df_feature_user` not `get_user_feature_df` — verb `get` + result type `df` + qualifiers
+- `get_set_timestamp_ms_user` not `get_user_timestamp_ms_set` — verb `get` + result type `set` + qualifiers
+
+**Class constructor parameter naming:**
+- `path_checkpoint` not `checkpoint_path` — noun `path` first
+- `path_embeddings` not `embeddings_path` — noun `path` first
+- `path_mapping_card` not `card_mapping_path` — noun `path` first
+
+**Class instance attribute naming (private):**
+- `_embeddings_card` not `_card_embeddings`
+- `_dim_embed` not `_embed_dim`
+- `_mean_feature`, `_std_feature` not `_feature_mean`, `_feature_std`
+- `_mean_pop_train` not `_train_pop_mean`
+- `_stats_card` not `_card_stats`
+- `_cache_user` not `_user_cache`
+- `_dict_card_to_idx` not `_card_to_idx` — dict prefix required for mapping types
+- `_dict_idx_to_card` not `_idx_to_card` — dict prefix required for mapping types
 
 ### camelCase (JS/TS)
 
