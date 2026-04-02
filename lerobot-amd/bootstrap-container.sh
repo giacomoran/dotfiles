@@ -8,7 +8,7 @@ set -euo pipefail
 # - Image: rocm/pytorch:rocm7.0_ubuntu24.04_py3.12_pytorch_release_2.7.1
 # - PyTorch 2.7.1 with ROCm 7.0 is pre-installed
 #
-# Based on AMD hackathon instructions for LeRobot v0.4.2
+# Based on AMD hackathon instructions for LeRobot v0.5.0
 
 # Path to this setup's fish-config.fish in the GitHub repository
 FISH_CONFIG_URL="https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-amd/config/fish/fish-config.fish"
@@ -90,7 +90,7 @@ git config --global user.email "${EMAIL_USER}@${EMAIL_DOMAIN}"
 # Clone and install LeRobot
 git clone https://github.com/huggingface/lerobot.git
 cd lerobot
-git checkout -b v0.4.2 v0.4.2
+git checkout v0.5.0 2>/dev/null || git checkout -b v0.5.0 v0.5.0
 pip install -e .
 
 echo ""

@@ -23,7 +23,7 @@ eval "$("$HOME/miniforge3/bin/conda" shell.bash hook)"
 echo "=== Creating lerobot conda environment ==="
 
 if ! conda env list | grep -q "^lerobot "; then
-    conda create -y -n lerobot python=3.11
+    conda create -y -n lerobot python=3.12
 fi
 
 conda activate lerobot
@@ -44,7 +44,7 @@ fi
 
 cd ~/lerobot
 git fetch --tags
-git checkout v0.4.2 2>/dev/null || git checkout -b v0.4.2 v0.4.2
+git checkout v0.5.0 2>/dev/null || git checkout -b v0.5.0 v0.5.0
 
 pip install -e .
 

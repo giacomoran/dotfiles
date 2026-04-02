@@ -103,7 +103,7 @@ git config --global user.email "giacomoran@gmail.com"
 echo "=== Setting up Python environment ==="
 
 cd ~
-uv venv --python 3.10 .venv
+uv venv --python 3.12 .venv
 
 # Install PyTorch 2.7.1 with CUDA 12.4 support
 uv pip install --python .venv/bin/python \
@@ -121,7 +121,7 @@ fi
 
 cd ~/lerobot
 git fetch --tags
-git checkout v0.4.2 2>/dev/null || git checkout -b v0.4.2 v0.4.2
+git checkout v0.5.0 2>/dev/null || git checkout -b v0.5.0 v0.5.0
 
 # Install LeRobot
 uv pip install --python ~/.venv/bin/python -e .
@@ -137,6 +137,6 @@ echo "Next steps:"
 echo "  1. SSH in via Tailscale"
 echo "  2. Fish + zellij auto-start, venv auto-activates"
 echo "  3. Verify GPU: python -c \"import torch; print(torch.cuda.is_available())\""
-echo "  4. Login to Hugging Face: huggingface-cli login"
+echo "  4. Login to Hugging Face: hf auth login"
 echo "  5. Login to Weights & Biases: wandb login"
 echo ""
