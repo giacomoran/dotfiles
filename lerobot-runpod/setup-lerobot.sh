@@ -1,40 +1,30 @@
 #!/bin/bash
 set -euo pipefail
 
-# LeRobot setup script (run after bootstrap.sh)
+# LeRobot setup script (run after setup.sh)
 # Follows official installation: https://huggingface.co/docs/lerobot/installation
+#
+# Uses a clean uv venv (no --system-site-packages) so that uv can resolve
+# torch + torchcodec together. Inheriting the RunPod container's pre-installed
+# PyTorch caused ABI mismatches with torchcodec (undefined C++ symbols).
 #
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/lerobot-runpod/setup-lerobot.sh | bash
 
 cd ~
 
-echo "=== Installing miniforge ==="
-
-if [ ! -d "$HOME/miniforge3" ]; then
-    curl -fsSL "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" -o /tmp/miniforge.sh
-    bash /tmp/miniforge.sh -b -p "$HOME/miniforge3"
-    rm /tmp/miniforge.sh
-fi
-
-# Initialize conda for this session
-eval "$("$HOME/miniforge3/bin/conda" shell.bash hook)"
-
-echo "=== Creating lerobot conda environment ==="
-
-if ! conda env list | grep -q "^lerobot "; then
-    conda create -y -n lerobot python=3.12
-fi
-
-conda activate lerobot
-
 echo "=== Installing ffmpeg ==="
 
-conda install -y ffmpeg=7.1.1 -c conda-forge
+# Add ffmpeg 7.x PPA (Ubuntu 24.04 ships 6.x by default)
+sudo add-apt-repository ppa:ubuntuhandbook1/ffmpeg7 -y
+sudo apt-get update
+sudo apt-get install -y ffmpeg
 
-echo "=== Installing PyTorch with CUDA ==="
+echo "=== Creating Python venv ==="
 
-pip install torch==2.7.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+# Clean venv — no --system-site-packages. Letting uv resolve torch + torchcodec
+# together avoids ABI mismatches between the RunPod PyTorch build and torchcodec.
+uv venv --python 3.12 ~/.venv
 
 echo "=== Cloning and installing LeRobot ==="
 
@@ -46,26 +36,23 @@ cd ~/lerobot
 git fetch --tags
 git checkout v0.5.0 2>/dev/null || git checkout -b v0.5.0 v0.5.0
 
-pip install -e .
+# Install torch + torchvision first so uv can pick ABI-compatible torchcodec
+uv pip install --python ~/.venv/bin/python torch torchvision --index-url https://download.pytorch.org/whl/cu128
+uv pip install --python ~/.venv/bin/python -e .
 
-echo "=== Initializing conda for fish shell ==="
+echo "=== Installing lerobot-policy-act-smooth ==="
 
-# Only run conda init if not already configured (idempotent)
-if ! grep -q "conda initialize" ~/.config/fish/config.fish 2>/dev/null; then
-    conda init fish
-fi
+# Custom ACT-smooth policy — not on PyPI, install directly from GitHub
+uv pip install --python ~/.venv/bin/python git+https://github.com/giacomoran/lerobot-policy-act-smooth.git
 
 echo ""
 echo "=========================================="
 echo "LeRobot setup complete!"
 echo "=========================================="
 echo ""
-echo "Usage:"
-echo "  conda activate lerobot"
-echo ""
 echo "Next steps:"
 echo "  1. Restart shell or run: exec fish"
-echo "  2. Activate env: conda activate lerobot"
+echo "  2. Venv auto-activates via direnv (cd into any project dir)"
 echo "  3. Verify GPU: python -c \"import torch; print(f'torch={torch.__version__}, cuda={torch.version.cuda}, available={torch.cuda.is_available()}')\""
 echo "  4. Login to Hugging Face: hf auth login"
 echo "  5. Login to Weights & Biases: wandb login"
