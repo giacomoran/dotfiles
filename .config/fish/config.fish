@@ -20,6 +20,9 @@ set -gx XDG_RUNTIME_DIR $TMPDIR
 # Tailscale CLI (bundled inside the macOS app)
 fish_add_path /Applications/Tailscale.app/Contents/MacOS
 
+# Obsidian CLI (bundled inside the macOS app)
+fish_add_path /Applications/Obsidian.app/Contents/MacOS
+
 # Set the default language
 # https://unix.stackexchange.com/q/87745
 # https://unix.stackexchange.com/q/576701
