@@ -13,6 +13,8 @@ Two subagents are available for naming convention work:
 
 When to use them:
 
+Never use abbreviations in names unless whitelisted in the naming-conventions skill (e.g. `id`, `idx`, `ts`, `cnt`, `df`, `is`, `url`). Spell everything else out in full.
+
 - **Writing new code in a new project** — just read the naming-conventions skill, no need for subagents
 - **Writing new code in an existing project** — try to be consistent with existing code, then run `find-naming-issues`, let me review, then run `fix-naming-issues`
 - **Updating code in an existing project** — try to be consistent, run `find-naming-issues`, then `fix-naming-issues`

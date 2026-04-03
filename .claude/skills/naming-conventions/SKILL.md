@@ -5,6 +5,8 @@ description: Code naming patterns
 
 Naming is one of the most important things in programming. I care deeply about getting it right. These conventions apply across all programming languages — examples use TypeScript and Python but the principles are universal. Understand the intent behind each rule, not just the specific examples.
 
+Never use abbreviations unless they appear in the whitelisted prefixes table below (e.g. `id`, `idx`, `ts`, `cnt`, `df`, `is`, `url`) or in the verb/file-prefix tables. Spell everything else out in full.
+
 If any convention is unclear, read `EXAMPLES.md` in this directory for concrete examples from real projects.
 
 ## Noun-First Variables

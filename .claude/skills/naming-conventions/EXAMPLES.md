@@ -19,7 +19,7 @@ Concrete examples collected from real projects. Append new entries as they come 
 - Dicts: `dict_review`, `dict_card_to_idx`, `dict_idx_to_card`, `dict_ts_to_row`
 - Arrays: `array_feats`, `array_ret`, `arr_acc_card`
 - Counts: `cnt_train`, `cnt_validation`, `cnt_test`, `cnt_samples`, `cnt_correct`, `cnt_batch`
-- Indices: `idx_row`, `idx_batch_start`, `idx_card_ret`, `indices_row`, `indices_retrieval`
+- Indices: `idx_row`, `idx_batch_start`, `idx_card_ret`, `idx_card_arr`, `idx_card_target`, `idx_card_val`, `indices_row`, `indices_retrieval`
 - Dimensions: `dim_input`, `dim_embed`, `dim_slot`
 - Means/stats: `mean_feature`, `std_feature`, `var_feature`, `mean_pop_train`, `sums_feature`, `sums_sq_feature`
 - Embeddings: `embeddings_card`, `embeds_user`, `embeds_ret`
@@ -32,7 +32,9 @@ Concrete examples collected from real projects. Append new entries as they come 
 - Accumulated scalars: `loss_total`, `loss_total_validation`, `cnt_correct_validation`, `cnt_validation`
 - Per-epoch metrics: `loss_train`, `acc_train`, `loss_validation`, `acc_validation`, `auc_validation`
 - Intervals: `interval_days`, `interval_ms`
+- Durations: `duration_ms_total` not `duration_total_ms` — noun `duration_ms` first, qualifier `total` last
 - Booleans: `is_suspended`, `is_first_review`
+- Masks: `mask_pre_cutoff` not `ixs_before_cutoff` — noun `mask` for boolean arrays; `ixs` prefix reserved for fractional/sort indices
 
 **Snakemake param keys (same noun-first rule applies):**
 - `dir_daily` not `daily_dir` — directory of per-user daily parquets
