@@ -13,6 +13,10 @@ set -euo pipefail
 # Usage (as giacomoran):
 #   curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/anki-runpod/setup-workspace.sh | bash
 
+# uv installs to ~/.local/bin; ensure it's on PATH when this script runs
+# non-interactively (e.g. via `su -c`)
+export PATH="$HOME/.local/bin:$PATH"
+
 WORKSPACE="/workspace"
 REPO_DIR="$WORKSPACE/ankihub-research"
 REPO_URL="https://github.com/andrewsanchez/ankihub-research"
