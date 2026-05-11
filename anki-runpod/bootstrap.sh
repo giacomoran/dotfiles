@@ -38,8 +38,9 @@ set -euo pipefail
 #   # then SSH as giacomoran and run setup.sh, then setup-workspace.sh
 #
 # Data transfer (after setup, using direct SSH):
-#   rsync -avz --progress -e "ssh -p <PORT>" \
+#   rsync -avz --no-owner --no-group --progress -e "ssh -p <PORT>" \
 #     /local/path/data/ankihub/ root@<IP>:/workspace/ankihub-research/data/ankihub/
+#   (--no-owner --no-group: network volumes reject chown, causing non-fatal errors without these flags)
 
 if [ "$(id -u)" -ne 0 ]; then
     echo "Error: This script must be run as root"
