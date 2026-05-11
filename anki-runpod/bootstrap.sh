@@ -21,15 +21,25 @@ set -euo pipefail
 #      Access at: https://<pod-id>-43800.proxy.runpod.net
 #      Start with: uv run aim up --host 0.0.0.0
 #
+# 5. SSH access — RunPod gives two connection strings:
+#    - Proxy:  ssh <key>@ssh.runpod.io          (interactive only; rsync/scp broken)
+#    - Direct: ssh root@<IP> -p <PORT>           (use this for rsync and automated setup)
+#
 # ==========================================
 # SETUP (once the pod is running)
 # ==========================================
 #
-# This script ONLY creates your user account with sudo access.
-# Run as root, then SSH as your user and run setup.sh.
+# Automated (from local machine, requires `expect`):
+#   expect ~/Projects/dotfiles-remote/anki-runpod/runpod-setup.exp
+#   (script lives at that path; edit SSH_USER/IP/PORT at the top before running)
 #
-# Usage (as root):
+# Manual (as root via direct SSH):
 #   curl -fsSL https://raw.githubusercontent.com/giacomoran/dotfiles/remote/anki-runpod/bootstrap.sh | bash
+#   # then SSH as giacomoran and run setup.sh, then setup-workspace.sh
+#
+# Data transfer (after setup, using direct SSH):
+#   rsync -avz --progress -e "ssh -p <PORT>" \
+#     /local/path/data/ankihub/ root@<IP>:/workspace/ankihub-research/data/ankihub/
 
 if [ "$(id -u)" -ne 0 ]; then
     echo "Error: This script must be run as root"

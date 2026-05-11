@@ -1,0 +1,78 @@
+#!/usr/bin/expect -f
+#
+# Automates the full pod setup via the RunPod proxy SSH connection.
+# Uses `expect` to drive the interactive PTY (the proxy requires one).
+#
+# Usage:
+#   expect ~/Projects/dotfiles-remote/anki-runpod/runpod-setup.exp
+#
+# Edit SSH_USER below to match the new pod's proxy connection string.
+# For data transfer, use the direct SSH connection (ssh root@IP -p PORT) with rsync.
+
+set SSH_USER "0xwr1y104d97fm-64411c0a"
+set SSH_HOST "ssh.runpod.io"
+set BASE "https://raw.githubusercontent.com/giacomoran/dotfiles/remote/anki-runpod"
+
+puts "\n=== Connecting to RunPod pod ==="
+spawn ssh -o StrictHostKeyChecking=accept-new -o ConnectTimeout=30 ${SSH_USER}@${SSH_HOST}
+
+# Wait for shell prompt after the RunPod welcome screen
+set timeout 30
+expect {
+    -re {#\s*$} {}
+    timeout { puts "ERROR: Timed out waiting for shell prompt"; exit 1 }
+}
+send "\r"
+set timeout 10
+expect -re {#\s*$}
+
+# Patch .bashrc so rsync works over the direct SSH connection.
+# The RunPod container's .bashrc has no interactive guard by default —
+# the welcome banner prints even for non-interactive shells, breaking rsync.
+puts "\n=== Patching .bashrc for rsync compatibility ==="
+send {python3 -c "
+with open('/root/.bashrc', 'r') as f:
+    content = f.read()
+guard = '# non-interactive guard (rsync compat)\ncase \$- in *i*) ;; *) return;; esac\n\n'
+if 'non-interactive guard' not in content:
+    with open('/root/.bashrc', 'w') as f:
+        f.write(guard + content)
+    print('GUARD_ADDED')
+else:
+    print('GUARD_ALREADY_PRESENT')
+"}
+send "\r"
+set timeout 10
+expect -re {GUARD_ADDED|GUARD_ALREADY_PRESENT}
+
+puts "\n=== Phase 1: bootstrap.sh (creates giacomoran user) ==="
+send "curl -fsSL ${BASE}/bootstrap.sh | bash; echo PHASE1_DONE\r"
+set timeout 120
+expect {
+    "PHASE1_DONE" { puts "bootstrap.sh complete" }
+    timeout       { puts "ERROR: Timed out in bootstrap.sh"; exit 1 }
+}
+
+puts "\n=== Phase 2: setup.sh (packages + tools) ==="
+send "su - giacomoran -s /bin/bash -c 'curl -fsSL ${BASE}/setup.sh | bash'; echo PHASE2_DONE\r"
+set timeout 600
+expect {
+    "PHASE2_DONE" { puts "setup.sh complete" }
+    timeout       { puts "ERROR: Timed out in setup.sh"; exit 1 }
+}
+
+puts "\n=== Phase 3: setup-workspace.sh (clone repo + uv sync) ==="
+send "su - giacomoran -s /bin/bash -c 'curl -fsSL ${BASE}/setup-workspace.sh | bash'; echo PHASE3_DONE\r"
+set timeout 300
+expect {
+    "PHASE3_DONE" { puts "setup-workspace.sh complete" }
+    timeout       { puts "ERROR: Timed out in setup-workspace.sh"; exit 1 }
+}
+
+send "exit\r"
+expect eof
+
+puts "\n=== Pod setup complete! ==="
+puts "Transfer data with:"
+puts "  rsync -avz --progress -e \"ssh -p PORT\" \\"
+puts "    /local/data/ankihub/ root@IP:/workspace/ankihub-research/data/ankihub/"

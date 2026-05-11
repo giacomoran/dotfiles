@@ -38,6 +38,7 @@ sudo apt-get install -y \
     htop \
     nvtop \
     ripgrep \
+    rsync \
     tree
 
 # On Ubuntu, bat is installed as batcat
