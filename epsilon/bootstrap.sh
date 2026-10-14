@@ -56,8 +56,11 @@ if [ ! -x ~/.local/bin/mise ]; then
 fi
 ~/.local/bin/mise use --global "node@$NODE_VERSION"
 
-# Enable pnpm through corepack, so each project gets the pnpm version in its packageManager field
-~/.local/bin/mise exec -- corepack enable pnpm
+# Install pnpm as its own mise tool, so it works with whatever Node version a project pins
+# (corepack's pnpm only exists in the Node install where it was enabled). pnpm switches itself
+# to the version in a project's packageManager field.
+~/.local/bin/mise exec -- corepack disable pnpm
+~/.local/bin/mise use --global pnpm@10
 
 # Install Claude Code
 if [ ! -x ~/.local/bin/claude ]; then
