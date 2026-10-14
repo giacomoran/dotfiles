@@ -45,6 +45,13 @@ cat > ~/.config/environment.d/999-path.conf <<'EOF'
 PATH=${HOME}/.local/share/mise/shims:${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}
 EOF
 
+# Let Vite-based dev servers started with --host answer at http://epsilon:<port>. Vite
+# rejects host names it doesn't know; this adds epsilon's tailnet names for every project
+# without touching their configs. The firewall keeps those servers tailnet-only.
+cat > ~/.config/environment.d/999-dev-servers.conf <<'EOF'
+__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS=epsilon,epsilon.tail52f04e.ts.net
+EOF
+
 # Install uv (Python versions and environments)
 if [ ! -x ~/.local/bin/uv ]; then
     curl -LsSf https://astral.sh/uv/install.sh | sh

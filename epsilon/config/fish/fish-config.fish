@@ -14,6 +14,10 @@ fish_add_path --global ~/.local/bin
 # Add mise shims to PATH so node, npm and pnpm work in non-interactive shells too
 fish_add_path --global ~/.local/share/mise/shims
 
+# Let Vite-based dev servers started with --host answer at http://epsilon:<port>
+# (same value as ~/.config/environment.d/999-dev-servers.conf, which covers T3 Code)
+set -gx __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS epsilon,epsilon.tail52f04e.ts.net
+
 # Use `less` as default pager
 # See below for configuration options
 set -gx PAGER less

@@ -59,6 +59,7 @@ apt-get install -y \
     smartmontools \
     socat \
     tree \
+    ufw \
     unzip \
     wget
 
@@ -152,6 +153,16 @@ if grep -q "^unpriv_bwrap " /sys/kernel/security/apparmor/profiles; then
     apparmor_parser -R /etc/apparmor.d/bwrap-userns-restrict
 fi
 apparmor_parser -r /etc/apparmor.d/bwrap
+
+# Accept connections only over Tailscale, whose access rules limit them to my devices, so
+# dev servers started with --host and sshd can't be reached from the home network. Allow
+# Tailscale's WireGuard port everywhere, or peers fall back to relayed connections.
+# Docker's published ports bypass ufw, so publish those on 127.0.0.1 only.
+ufw allow in on tailscale0 comment "everything over Tailscale"
+ufw allow 41641/udp comment "Tailscale direct connections"
+ufw default deny incoming
+ufw default allow outgoing
+ufw --force enable
 
 # Make hard-coded macOS paths (CLAUDE.md files, skills, scripts) resolve on Linux
 mkdir -p /Users
