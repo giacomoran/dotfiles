@@ -1,0 +1,60 @@
+#!/bin/bash
+set -euo pipefail
+
+# Back up epsilon to the NAS with restic, or check the repository.
+#
+#   epsilon-backup backup   nightly, from epsilon-backup.timer
+#   epsilon-backup check    weekly, from epsilon-backup-check.timer
+#
+# The repository lives on the NAS's rest-server, reachable over Tailscale only and
+# in append-only mode, so this machine can add snapshots but never delete them.
+# Secrets in /etc/restic are root-only, so agents running as giacomoran can't
+# read or touch the backups.
+
+if [ "$#" -ne 1 ]; then
+    echo "usage: epsilon-backup backup|check" >&2
+    exit 2
+fi
+command="$1"
+
+export RESTIC_REPOSITORY="rest:http://nas-randazzo:8000/epsilon/"
+export RESTIC_PASSWORD_FILE=/etc/restic/epsilon.repository-password
+export RESTIC_REST_USERNAME=epsilon
+RESTIC_REST_PASSWORD="$(cat /etc/restic/epsilon.rest-password)"
+export RESTIC_REST_PASSWORD
+export RESTIC_CACHE_DIR=/var/cache/restic
+
+if [ "$command" = "backup" ]; then
+    # A raw copy of a live SQLite database in WAL mode can be torn, so back up
+    # consistent snapshots of T3 Code's databases made with SQLite's backup API.
+    # T3 Code writes to them constantly; wait up to a minute for its lock.
+    # server-owner.sqlite is skipped: it's an empty file the running server keeps
+    # locked so only one server owns the data directory, and it holds no data.
+    snapshot_dir=/var/backups/t3-userdata
+    install -d -m 700 "$snapshot_dir"
+    rm -f "$snapshot_dir"/*.sqlite
+    for database in /home/giacomoran/.t3/userdata/*.sqlite; do
+        if [ "$(basename "$database")" = "server-owner.sqlite" ]; then
+            continue
+        fi
+        sqlite3 -cmd ".timeout 60000" "$database" ".backup '$snapshot_dir/$(basename "$database")'"
+    done
+
+    restic backup \
+        --tag nightly \
+        --one-file-system \
+        --exclude-caches \
+        --exclude-file /etc/restic/epsilon.excludes \
+        /home/giacomoran /etc /root "$snapshot_dir"
+    exit 0
+fi
+
+if [ "$command" = "check" ]; then
+    # Verify the repository structure, plus a rotating twelfth of the data, so
+    # every pack gets read back roughly once a quarter
+    restic check --read-data-subset "$(( ($(date +%-V) % 12) + 1 ))/12"
+    exit 0
+fi
+
+echo "unknown command: $command (expected backup or check)" >&2
+exit 2

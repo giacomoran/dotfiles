@@ -1,0 +1,38 @@
+# Rebuildable: toolchains, dependency installs, caches and build output
+/home/giacomoran/.cache
+/home/giacomoran/.npm
+/home/giacomoran/.cargo
+/home/giacomoran/.rustup
+/home/giacomoran/.local/share/mise
+/home/giacomoran/.local/share/pnpm
+/home/giacomoran/.local/share/uv
+/home/giacomoran/.local/share/claude
+/home/giacomoran/.t3/runtime
+/home/giacomoran/.t3/tools
+/home/giacomoran/.t3/caches
+node_modules
+.venv
+.turbo
+.pnpm-store
+/home/giacomoran/Projects/*/dist
+/home/giacomoran/Projects/t3code/release
+/home/giacomoran/Projects/t3code/release-cli
+/home/giacomoran/Projects/t3code/apps/*/dist
+/home/giacomoran/Projects/t3code/apps/server/dist-exe
+/home/giacomoran/Projects/t3code/native/resource-monitor/target
+
+# Live SQLite databases: epsilon-backup snapshots consistent copies instead
+/home/giacomoran/.t3/userdata/*.sqlite
+/home/giacomoran/.t3/userdata/*.sqlite-wal
+/home/giacomoran/.t3/userdata/*.sqlite-shm
+/home/giacomoran/.t3/userdata/*.sqlite-journal
+
+# Login tokens and private keys: logging in again is easy, and they shouldn't sit in backups
+/home/giacomoran/.config/gh/hosts.yml
+/home/giacomoran/.claude/.credentials.json
+/home/giacomoran/.codex/auth.json
+/home/giacomoran/.ssh/id_*
+
+# The backup's own secrets, and logs
+/etc/restic
+/home/giacomoran/*.log

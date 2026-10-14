@@ -1,0 +1,10 @@
+[Unit]
+Description=Check epsilon's restic repository on the NAS
+Wants=network-online.target
+After=network-online.target tailscaled.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/epsilon-backup check
+Nice=10
+IOSchedulingClass=idle

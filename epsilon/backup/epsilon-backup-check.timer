@@ -1,0 +1,10 @@
+[Unit]
+Description=Check epsilon's restic repository every week
+
+[Timer]
+OnCalendar=Sun *-*-* 05:00
+RandomizedDelaySec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

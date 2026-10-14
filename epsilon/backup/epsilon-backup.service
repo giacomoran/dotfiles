@@ -1,0 +1,10 @@
+[Unit]
+Description=Back up epsilon to the NAS with restic
+Wants=network-online.target
+After=network-online.target tailscaled.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/epsilon-backup backup
+Nice=10
+IOSchedulingClass=idle
