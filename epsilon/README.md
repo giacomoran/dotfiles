@@ -49,7 +49,38 @@ Unlike `general/`, there is no `cloud-init.yaml`: the OS was installed by hand f
    ssh root@epsilon '/home/giacomoran/.local/bin/t3 browser setup'
    ```
 
-   Dev servers stay on epsilon's `localhost`; open them in a T3 browser tab in an epsilon project, which runs on epsilon and streams to the app.
+7. Set up backups, see [Backups](#backups).
+
+## Dev servers
+
+Start them with `--host` (e.g. `pnpm dev --host`) and open `http://epsilon:<port>` from the Mac or phone. The firewall (`ufw`, from `bootstrap-root.sh`) only accepts connections over Tailscale, whose access rules limit epsilon to my devices, so they stay off the home network. Vite rejects unknown host names; `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` (set by `bootstrap.sh` for T3 Code and fish) adds epsilon's tailnet names for every project. The agent instructions on epsilon say to use `--host`.
+
+T3 browser tabs in an epsilon project also reach `localhost` on epsilon, but they stream a headless Chrome and feel laggy; they suit agents checking their own work.
+
+Docker's published ports bypass `ufw`: publish them on `127.0.0.1` only.
+
+## Backups
+
+Nightly restic backups to the NAS (`nas-randazzo`), with a weekly check:
+
+- **NAS side:** restic's [rest-server](https://github.com/restic/rest-server) runs under my NAS account from `~/rest-server` (start script: `nas/rest-server-start.sh`). It listens on `127.0.0.1:8000`; the NAS runs Tailscale in userspace mode, which forwards tailnet connections to localhost, so it's reachable over Tailscale but not from the home network. `--append-only` means epsilon can add snapshots but never delete them, so a compromised epsilon can't wipe its backups. `--private-repos` keeps epsilon's login to its own repository.
+- **epsilon side:** `backup/` holds `epsilon-backup` (run by `epsilon-backup.timer` at 03:30 and `epsilon-backup-check.timer` on Sundays) and the excludes. It backs up `/home/giacomoran`, `/etc`, `/root` and consistent SQLite snapshots of T3 Code's databases, minus rebuildable toolchains, caches and build output, and minus login tokens and private keys. Secrets live in `/etc/restic`, root-only, so agents running as `giacomoran` can't read or touch the backups.
+- **Pruning:** from the Mac, with `~/.config/restic/prune-epsilon.sh`, over SFTP straight to the repository's files.
+
+Setting it up:
+
+1. On the NAS, put the rest-server binary (`linux_armv7` release) in `~/rest-server/bin/` and `nas/rest-server-start.sh` as `~/rest-server/start.sh`.
+2. In DSM → Control Panel → Task Scheduler, create two tasks running `/var/services/homes/giacomoran/rest-server/start.sh` as `giacomoran`: a triggered task on boot-up, and a scheduled task every hour (it exits if the server is already running).
+3. From the Mac, run the setup on epsilon. It installs restic, generates the secrets once, and creates the repository:
+
+   ```sh
+   tar --no-xattrs -C epsilon/backup -cf - . | ssh root@epsilon 'dir=$(mktemp -d) && tar -xf - -C "$dir" && bash "$dir/setup.sh" "$dir"'
+   ```
+
+   On the first run, copy epsilon's login hash into the NAS's htpasswd before the setup creates the repository: `ssh root@epsilon cat /etc/restic/epsilon.htpasswd | ssh nas-randazzo 'umask 077; cat > ~/rest-server/data/.htpasswd'`.
+4. Store the repository password in 1Password as "restic epsilon": `ssh root@epsilon cat /etc/restic/epsilon.repository-password`. Without it the backups can't be read.
+
+Restoring, on epsilon as root: `epsilon-backup` sets the repository up from `/etc/restic`; for a one-off restore, export the same variables and run `restic restore latest --target /tmp/restore --include <path>`. If epsilon is gone, restore from the Mac over SFTP: `restic -r sftp:giacomoran@nas-randazzo:/home/rest-server/data/epsilon restore …` with the password from 1Password.
 
 ## BIOS settings
 
