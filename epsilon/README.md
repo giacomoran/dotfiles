@@ -43,6 +43,14 @@ Unlike `general/`, there is no `cloud-init.yaml`: the OS was installed by hand f
 
    Open the pairing link from `t3 pair --tailscale` on the Mac to add epsilon as an environment in T3 Code.
 
+6. From the Mac, let T3's browser start. Ubuntu blocks the sandbox its headless Chrome runs in, so browser tabs and HTML previews stay blank until an AppArmor profile allows it:
+
+   ```sh
+   ssh root@epsilon '/home/giacomoran/.local/bin/t3 browser setup'
+   ```
+
+   Dev servers stay on epsilon's `localhost`; open them in a T3 browser tab in an epsilon project, which runs on epsilon and streams to the app.
+
 ## BIOS settings
 
 - Advanced → AMD CBS → FCH Common Options → AC Power Loss Options → Always On (starts by itself after a power cut)
