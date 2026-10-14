@@ -33,10 +33,12 @@ if [ ! -f /etc/apt/keyrings/githubcli-archive-keyring.gpg ]; then
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" > /etc/apt/sources.list.d/github-cli.list
 fi
 
-# Install base packages, plus hardware monitoring and OOM protection for a 24/7 box
+# Install base packages, plus hardware monitoring and OOM protection for a 24/7 box.
+# bubblewrap and socat back the Claude Code and Codex sandboxes on Linux.
 apt-get update
 apt-get install -y \
     bat \
+    bubblewrap \
     build-essential \
     curl \
     direnv \
@@ -55,6 +57,7 @@ apt-get install -y \
     nvme-cli \
     ripgrep \
     smartmontools \
+    socat \
     tree \
     unzip \
     wget
@@ -127,6 +130,28 @@ EARLYOOM_ARGS="-r 3600 --avoid (^|/)(init|systemd|sshd|tailscaled|t3)$"
 EOF
 systemctl enable --now earlyoom
 systemctl restart earlyoom
+
+# Let the Claude Code and Codex sandboxes (bubblewrap) work under Ubuntu's user-namespace
+# restriction. Claude Code's docs add an unconfined `bwrap` profile, but Ubuntu 26.04 also
+# ships bwrap-userns-restrict, which defines the same profile name, loads after it, and
+# denies every capability inside the sandbox (apply-seccomp then fails). Disable that one.
+cat > /etc/apparmor.d/bwrap <<'EOF'
+abi <abi/4.0>,
+include <tunables/global>
+
+profile bwrap /usr/bin/bwrap flags=(unconfined) {
+  userns,
+  include if exists <local/bwrap>
+}
+EOF
+if [ -f /etc/apparmor.d/bwrap-userns-restrict ]; then
+    ln -sf /etc/apparmor.d/bwrap-userns-restrict /etc/apparmor.d/disable/bwrap-userns-restrict
+fi
+# Unload it only while it is loaded, so a second run of this script doesn't fail
+if grep -q "^unpriv_bwrap " /sys/kernel/security/apparmor/profiles; then
+    apparmor_parser -R /etc/apparmor.d/bwrap-userns-restrict
+fi
+apparmor_parser -r /etc/apparmor.d/bwrap
 
 # Make hard-coded macOS paths (CLAUDE.md files, skills, scripts) resolve on Linux
 mkdir -p /Users
