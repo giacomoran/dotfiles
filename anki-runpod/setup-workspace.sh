@@ -19,7 +19,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 WORKSPACE="/workspace"
 REPO_DIR="$WORKSPACE/ankihub-research"
-REPO_URL="https://github.com/andrewsanchez/ankihub-research"
+REPO_URL="git@github.com:andrewsanchez/ankihub-research.git"
 
 echo "=== Setting up workspace at $WORKSPACE ==="
 
