@@ -102,6 +102,10 @@ tailscale set --operator="$USERNAME"
 apt-get install -y libegl1 libegl-mesa0 libgl1 libgles2 libopengl0 mesa-libgallium
 usermod -aG render "$USERNAME"
 
+# Install Docker for containers like ai-saldatura's SimMachine (see README.md). giacomoran is
+# deliberately not in the docker group, which is root in all but name: agents run as giacomoran.
+apt-get install -y docker.io
+
 # Use the AMD hardware watchdog: systemd pings it, and if the kernel hangs the board resets.
 # Ubuntu blacklists the driver, and both systemd-modules-load and the initramfs honor the blacklist,
 # while a plain `modprobe sp5100_tco` doesn't. systemd only looks for a watchdog early in boot, so

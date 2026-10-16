@@ -54,11 +54,40 @@ Unlike `general/`, there is no `cloud-init.yaml`: the OS was installed by hand f
 
 ## Dev servers
 
-Start them with `--host` (e.g. `pnpm dev --host`) and open `http://epsilon:<port>` from the Mac or phone. The firewall (`ufw`, from `bootstrap-root.sh`) only accepts connections over Tailscale, whose access rules limit epsilon to my devices, so they stay off the home network. Vite rejects unknown host names; `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` (set by `bootstrap.sh` for T3 Code and fish) adds epsilon's tailnet names for every project. The agent instructions on epsilon say to use `--host`.
+The Mac forwards every port a server listens on at epsilon (1024 to 32767, except T3 Code's and SimMachine's) to the same port on the Mac, so a server an agent starts opens there at `http://localhost:<port>`, like a local one. That also covers servers that must stay on `127.0.0.1`, like ai-saldatura's sessions: the browser app connects to `ws://127.0.0.1:<port>`, and the Rerun viewer only accepts pages served from `localhost`. The forwarder is `~/.config/epsilon-forward/epsilon-forward.py` on the Mac, kept running by launchd (`~/Library/LaunchAgents/com.giacomoran.epsilon-forward.plist`); it holds one SSH connection, checks epsilon's listening ports every 2 s, and skips (with a notification) a port the Mac already uses. The agent instructions on epsilon say to give `localhost` URLs.
+
+From the phone, a server started with `--host` (e.g. `pnpm dev --host`) opens at `http://epsilon:<port>`. The firewall (`ufw`, from `bootstrap-root.sh`) only accepts connections over Tailscale, whose access rules limit epsilon to my devices, so they stay off the home network. Vite rejects unknown host names; `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` (set by `bootstrap.sh` for T3 Code and fish) adds epsilon's tailnet names for every project.
 
 T3 browser tabs in an epsilon project also reach `localhost` on epsilon, but they stream a headless Chrome and feel laggy; they suit agents checking their own work.
 
 Docker's published ports bypass `ufw`: publish them on `127.0.0.1` only.
+
+## SimMachine
+
+Fairino's controller software, as a Docker image driving a virtual robot. ai-saldatura uses it in place of the real controller (see `python/packages/3_experiments_fairino_simmachine/README.md` in that repo). The container `fairino-container` runs as root with `--restart unless-stopped`, its ports published on `127.0.0.1`, so agents reach the SDK ports without access to Docker. `docker exec` (and the three experiments that use it) needs `sudo`. It idles at about 20% of one core.
+
+Setting it up, after `bootstrap-root.sh` installed Docker:
+
+```sh
+ssh epsilon 'mkdir -p ~/Downloads/fairino-simmachine && cd ~/Downloads/fairino-simmachine && uvx gdown 1Y8o3_dx-vQHERNur1jzEFYbd8f3Tabb7 -O simmachine-v3.9.6.zip && sha256sum simmachine-v3.9.6.zip'
+# expect 70f4a86c693c9fa262a9b92867333a49a8683ae7a353b06a183bbfcdd9b5d735
+ssh root@epsilon 'bash -s' <<'EOF'
+cd /home/giacomoran/Downloads/fairino-simmachine
+unzip -q simmachine-v3.9.6.zip
+docker load -i "FAIRINO SimMachine Docker/FAIRINOSimMachine/FAIRINOSimMachine.tar"
+docker network create --driver bridge --subnet 192.168.58.0/24 --gateway 192.168.58.1 fairino-net
+docker run -d --name fairino-container --privileged -u root --restart unless-stopped \
+  --net fairino-net --ip 192.168.58.2 \
+  -p 127.0.0.1:8000:80 \
+  -p 127.0.0.1:8050-8099:8050-8099 -p 127.0.0.1:9950-9999:9950-9999 \
+  -p 127.0.0.1:10000:10000 -p 127.0.0.1:20001-20020:20001-20020 \
+  -p 127.0.0.1:20006:20006/udp -p 127.0.0.1:20007:20007/udp \
+  fairino_simmachine:v3.9.6
+sleep 40
+# The image boots as an FR5; make it the FR20 (survives restarts)
+python3 -c "import xmlrpc.client as x; p=x.ServerProxy('http://127.0.0.1:20003'); print(p.SetRobotType(402)); print(p.GetSoftwareVersion())"
+EOF
+```
 
 ## Obsidian
 
