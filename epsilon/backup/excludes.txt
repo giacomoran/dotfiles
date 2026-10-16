@@ -31,6 +31,7 @@ node_modules
 /home/giacomoran/.config/gh/hosts.yml
 /home/giacomoran/.claude/.credentials.json
 /home/giacomoran/.codex/auth.json
+/home/giacomoran/.config/obsidian-headless/auth_token
 /home/giacomoran/.ssh/id_*
 
 # The backup's own secrets, and logs
