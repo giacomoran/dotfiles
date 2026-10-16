@@ -116,8 +116,10 @@ if status is-interactive
     #
 
     if not set -q IN_NIX_SHELL
+        # asdf >= 0.16 is a Go binary with no asdf.fish to source; it only
+        # needs its shims directory on PATH.
         if type -q asdf
-            source (brew --prefix asdf)/libexec/asdf.fish
+            fish_add_path --prepend $HOME/.asdf/shims
         end
 
         if test -e $HOME/.asdf/plugins/java/set-java-home.fish
@@ -141,3 +143,6 @@ if status is-interactive
         end
     end
 end
+
+# Scaleway CLI autocomplete initialization.
+eval (scw autocomplete script shell=fish)
