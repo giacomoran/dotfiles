@@ -68,6 +68,8 @@ if status is-interactive
     # alias find="fd"
     # alias grep="rg"
     alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+    # The vault's scripts, Claude Code settings and skills (private repo giacomoran/obsidian-setup)
+    alias obsidian-setup="/usr/bin/git --git-dir=$HOME/.obsidian-setup/ --work-tree=$HOME/Obsidian/giacomo"
     alias textedit='open -a TextEdit'
 
     #

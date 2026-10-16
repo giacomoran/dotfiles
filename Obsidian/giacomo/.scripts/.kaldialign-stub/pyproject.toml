@@ -1,6 +1,0 @@
-[project]
-name = "kaldialign"
-version = "0.9.1"
-
-[tool.hatch.build.targets.wheel]
-packages = ["kaldialign"]
