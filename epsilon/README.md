@@ -4,7 +4,7 @@ Always-on home server at my parents' house that runs T3 Code and coding agents.
 
 - Trigkey S5 mini PC: Ryzen 7 5800H (8C/16T), 2 × 16 GB DDR4, Crucial P3 Plus 500 GB NVMe
 - Ubuntu Server 26.04, reachable only over Tailscale (`ssh epsilon`, `ssh root@epsilon`)
-- Disk: LVM, `ubuntu-lv` (350 GB, `/`) plus ~112 GB free in `ubuntu-vg` for an encrypted volume for NDA client projects
+- Disk: LVM, `ubuntu-lv` (350 GB, `/`) plus `volume-encrypted` (~112 GB), an encrypted volume for client projects under NDA
 
 Unlike `general/`, there is no `cloud-init.yaml`: the OS was installed by hand from a USB stick, and `giacomoran` keeps a sudo password. Root-level setup runs as root over Tailscale SSH instead, so it is split from the user-level setup.
 
@@ -51,6 +51,7 @@ Unlike `general/`, there is no `cloud-init.yaml`: the OS was installed by hand f
 
 7. Set up backups, see [Backups](#backups).
 8. Set up the Obsidian vault, see [Obsidian](#obsidian).
+9. Set up the encrypted volume, see [Encrypted volume](#encrypted-volume).
 
 ## Dev servers
 
@@ -87,6 +88,19 @@ sleep 40
 # The image boots as an FR5; make it the FR20 (survives restarts)
 python3 -c "import xmlrpc.client as x; p=x.ServerProxy('http://127.0.0.1:20003'); print(p.SetRobotType(402)); print(p.GetSoftwareVersion())"
 EOF
+```
+
+## Encrypted volume
+
+Client projects under NDA live on `volume-encrypted`, a LUKS-encrypted volume mounted at `/mnt/volume-encrypted`, so their data is unreadable on a stolen or discarded disk. Clone them straight into it (`/mnt/volume-encrypted/<name>`) and add that path as the T3 project. epsilon has no TPM and Secure Boot is off, so there is nothing to unlock it with at boot without leaving the key on the disk: the volume stays locked after every boot until I unlock it from the Mac with `ssh -t root@epsilon volume-encrypted-unlock` (passphrase in 1Password as "epsilon volume-encrypted"). While it is locked, its mount point refuses writes, so nothing meant for it lands on the unencrypted disk. `volume-encrypted-lock` locks it again. Backups skip it, since it is outside `/home/giacomoran`.
+
+Agents can write there (the Claude Code sandbox's `allowWrite` on epsilon lists `/mnt/volume-encrypted`). A path agents must not read goes in the deny lists of `~/.claude/settings.json` and `~/.codex/config.toml` with its `/mnt/volume-encrypted/...` path.
+
+Setting it up, from the Mac:
+
+```sh
+tar --no-xattrs -C epsilon/volume-encrypted -cf - . | ssh root@epsilon 'dir=$(mktemp -d) && tar -xf - -C "$dir" && bash "$dir/setup.sh" "$dir"'
+ssh -t root@epsilon volume-encrypted-format   # asks for the new passphrase
 ```
 
 ## Obsidian

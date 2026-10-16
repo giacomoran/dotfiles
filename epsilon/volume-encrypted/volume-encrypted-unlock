@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+
+# Unlock and mount the encrypted volume, which stays locked after every boot. cryptsetup
+# asks for the passphrase (1Password: "epsilon volume-encrypted"). From the Mac:
+#
+#   ssh -t root@epsilon volume-encrypted-unlock
+
+cryptsetup open /dev/ubuntu-vg/volume-encrypted volume-encrypted
+mount /dev/mapper/volume-encrypted /mnt/volume-encrypted

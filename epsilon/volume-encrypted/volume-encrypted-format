@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+# Encrypt the volume and create its file system, once. cryptsetup asks for the new
+# passphrase: save it in 1Password as "epsilon volume-encrypted" first, since it is the
+# only way to read the volume.
+
+if cryptsetup isLuks /dev/ubuntu-vg/volume-encrypted; then
+    echo "The volume is already encrypted" >&2
+    exit 1
+fi
+cryptsetup luksFormat --label volume-encrypted /dev/ubuntu-vg/volume-encrypted
+cryptsetup open /dev/ubuntu-vg/volume-encrypted volume-encrypted
+mkfs.ext4 -L volume-encrypted /dev/mapper/volume-encrypted
+mount /dev/mapper/volume-encrypted /mnt/volume-encrypted
+chown giacomoran:giacomoran /mnt/volume-encrypted
