@@ -90,6 +90,11 @@ fi
 ~/.local/bin/mise exec -- npm install --global @openai/codex
 ~/.local/bin/mise reshim
 
+# Install the instructions Claude Code and Codex follow in every project
+mkdir -p ~/.claude ~/.codex
+cp "$SCRIPT_DIR/config/agents/CLAUDE.md" ~/.claude/CLAUDE.md
+cp "$SCRIPT_DIR/config/agents/AGENTS.md" ~/.codex/AGENTS.md
+
 # Install Obsidian Headless, which syncs the vault through Obsidian Sync without the app.
 # Its SQLite dependency needs its install script, which npm blocks by default.
 ~/.local/bin/mise exec -- npm install --global --allow-scripts=better-sqlite3 obsidian-headless
