@@ -1,0 +1,31 @@
+collections:
+  wiki:
+    path: /home/giacomoran/Obsidian/giacomo/👾 Wiki
+    pattern: "**/*.md"
+    context:
+      "": Claude's evergreen wiki — atomic notes, source notes, Thesis MOCs, Index, Log. Title = assertion. See 👾 Wiki/CLAUDE.md for the full schema.
+  sources-web:
+    path: /home/giacomoran/Obsidian/giacomo/📘 Sources - Web
+    pattern: "**/*.md"
+    context:
+      "": Web articles clipped with Obsidian Web Clipper — blogs, news, research write-ups
+  sources-videos:
+    path: /home/giacomoran/Obsidian/giacomo/📘 Sources - Videos
+    pattern: "**/*.md"
+    context:
+      "": Video and podcast transcripts — Dwarkesh, Asianometry, 20VC, PROTOTYPE, etc.
+  work:
+    path: /home/giacomoran/Obsidian/giacomo/🛠️ Work
+    pattern: "**/*.md"
+    context:
+      "": Giacomo's work projects — AnkiHub (spaced repetition for med students), Rember (SRS), Robotics Startup, Sindaco, UniCoGe
+  sources-docs:
+    path: /home/giacomoran/.cache/qmd-pdf/sources-docs
+    pattern: "**/*.md"
+    update: /home/giacomoran/.local/share/qmd-pdf/.venv/bin/python -I /home/giacomoran/.local/share/qmd-pdf/pdf_to_markdown.py /home/giacomoran/.cache/qmd-pdf/sources-docs "/home/giacomoran/Obsidian/giacomo/📘 Sources - Docs"/*.pdf
+    context:
+      "": Full text extracted from PDFs in 📘 Sources - Docs (one '## Page N' section per PDF page; source_pdf in frontmatter). Papers, books, reports, decks, and autobiographies (Casanova, Cellini, Da Ponte in Italian; Alfieri in English translation).
+models:
+  embed: hf:ggml-org/embeddinggemma-300M-GGUF/embeddinggemma-300M-Q8_0.gguf
+  generate: hf:tobil/qmd-query-expansion-1.7B-gguf/qmd-query-expansion-1.7B-q4_k_m.gguf
+  rerank: hf:ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF/qwen3-reranker-0.6b-q8_0.gguf

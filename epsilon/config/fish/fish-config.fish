@@ -59,6 +59,8 @@ if status is-interactive
     alias ll="eza --icons --long --header --git --all"
     alias la="eza --icons --across --all"
     alias tree="tree -I '__pycache__|node_modules|*.pyc|.git|.venv|venv|.mypy_cache|.pytest_cache|.ruff_cache|dist|build|*.egg-info|.tox|.coverage|.ipynb_checkpoints'"
+    # The vault's scripts, Claude Code settings and skills (private repo giacomoran/obsidian-setup)
+    alias obsidian-setup="/usr/bin/git --git-dir=$HOME/.obsidian-setup/ --work-tree=$HOME/Obsidian/giacomo"
 
     # Abbreviations
     abbr --add --global gs 'git status'

@@ -30,12 +30,8 @@ EMAIL_DOMAIN="gmail.com"
 git config --global user.email "${EMAIL_USER}@${EMAIL_DOMAIN}"
 git config --global init.defaultBranch main
 
-# Projects live in ~/Projects. Add a lowercase alias, since macOS paths are
-# case-insensitive and some configs say ~/projects.
+# Projects live in ~/Projects, as on the Mac
 mkdir -p ~/Projects
-if [ ! -e ~/projects ]; then
-    ln -s ~/Projects ~/projects
-fi
 
 # Give systemd user services (T3 Code and the agents it spawns) the same tool PATH as fish.
 # The 999- prefix sorts after Ubuntu's 99-environment.conf, which resets PATH from /etc/environment.
@@ -102,6 +98,33 @@ cp "$SCRIPT_DIR/config/agents/AGENTS.md" ~/.codex/AGENTS.md
 # The service needs a login first (see README.md), so it is only installed here, not enabled
 mkdir -p ~/.config/systemd/user ~/Obsidian/giacomo
 cp "$SCRIPT_DIR/config/systemd/obsidian-sync.service" ~/.config/systemd/user/
+systemctl --user daemon-reload
+
+# Install relay-cli (rmd), which syncs the vault's Relay shared folders without the app. Pinned,
+# since it is young and runs Relay's sync engine on files agents edit. Its service needs a
+# login and clones first (see README.md), so it is only installed here, not enabled
+RMD_REVISION=1c6d6cb210e7e1d60ac59e43ad7a28b4e27cb73b
+if [ "$(cat ~/.local/share/relay-cli/current/revision 2>/dev/null)" != "$RMD_REVISION" ]; then
+    curl -fsSL "https://raw.githubusercontent.com/No-Instructions/relay-cli/$RMD_REVISION/install.sh" | RMD_REVISION="$RMD_REVISION" bash
+fi
+cp "$SCRIPT_DIR/config/systemd/relay.service" ~/.config/systemd/user/
+systemctl --user daemon-reload
+
+# Install qmd, the vault's search engine, with the same collections as on the Mac.
+# Its SQLite and llama.cpp dependencies need their install scripts.
+~/.local/bin/mise exec -- npm install --global --allow-scripts=better-sqlite3,node-llama-cpp @tobilu/qmd@2.8.3
+~/.local/bin/mise reshim
+mkdir -p ~/.config/qmd ~/.local/share/qmd-pdf ~/.cache/qmd-pdf/sources-docs
+cp "$SCRIPT_DIR/config/qmd/index.yml" ~/.config/qmd/index.yml
+# PDF-to-markdown converter for the sources-docs collection (text layer only, no OCR)
+cp "$SCRIPT_DIR/config/qmd/pdf_to_markdown.py" ~/.local/share/qmd-pdf/pdf_to_markdown.py
+if [ ! -x ~/.local/share/qmd-pdf/.venv/bin/python ]; then
+    ~/.local/bin/uv venv ~/.local/share/qmd-pdf/.venv
+fi
+~/.local/bin/uv pip install --python ~/.local/share/qmd-pdf/.venv/bin/python pymupdf
+# Re-index every 15 minutes, so notes edited on the Mac show up in searches. Enabled
+# after the first index, see README.md
+cp "$SCRIPT_DIR/config/qmd/qmd-update.service" "$SCRIPT_DIR/config/qmd/qmd-update.timer" ~/.config/systemd/user/
 systemctl --user daemon-reload
 
 # Install T3 Code and run it as a user service that starts at boot

@@ -1,0 +1,13 @@
+[Unit]
+Description=Relay for the shared folders in ~/Obsidian/giacomo/🛰️ Relay (relay-cli)
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h
+ExecStart=%h/.local/bin/rmd start --foreground
+ExecStop=%h/.local/bin/rmd stop
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target

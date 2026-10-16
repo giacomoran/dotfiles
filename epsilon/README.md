@@ -105,7 +105,7 @@ ssh -t root@epsilon volume-encrypted-format   # asks for the new passphrase
 
 ## Obsidian
 
-The vault lives in `~/Obsidian/giacomo`, so agents on epsilon can work on it. [Obsidian Headless](https://obsidian.md/help/sync/headless) (`ob`) syncs it through Obsidian Sync without the app, as one more Sync device; `obsidian-sync.service` runs `ob sync --continuous`. Plugins don't run, so the Relay folders only update through Obsidian Sync, and dot-folders like `.claude/` don't sync at all.
+The vault lives in `~/Obsidian/giacomo`, so agents on epsilon can work on it. [Obsidian Headless](https://obsidian.md/help/sync/headless) (`ob`) syncs it through Obsidian Sync without the app, as one more Sync device; `obsidian-sync.service` runs `ob sync --continuous`. Plugins don't run, so three things are set up next to it: the Relay folders sync through relay-cli, dot-folders come from the `obsidian-setup` repo, and files over Sync's 5 MB limit come from the Mac once a day (`~/.config/obsidian-large-files/sync.sh` on the Mac, run by launchd).
 
 Setting it up (`bootstrap.sh` installs `ob` and the service), interactively on epsilon:
 
@@ -113,11 +113,55 @@ Setting it up (`bootstrap.sh` installs `ob` and the service), interactively on e
 ob login
 ob sync-list-remote   # shows the remote vault's name
 ob sync-setup --vault <name> --path ~/Obsidian/giacomo --device-name epsilon
+ob sync-config --path ~/Obsidian/giacomo --file-types image,audio,pdf,video,unsupported --excluded-folders "🛰️ Relay"
 ob sync --path ~/Obsidian/giacomo
 systemctl --user enable --now obsidian-sync.service
 ```
 
-`sync-setup` asks for the vault's end-to-end encryption password, if it has one. The first `ob sync` downloads the whole vault; the service takes over from there.
+`sync-setup` asks for the vault's end-to-end encryption password, if it has one. The first `ob sync` downloads the whole vault; the service takes over from there. `🛰️ Relay` is excluded on every device, since Relay and Obsidian Sync must not sync the same files.
+
+### obsidian-setup
+
+The vault's dot-folders don't sync through Obsidian Sync, so its scripts (`.scripts/`), Claude Code settings and project skills (`.claude/`) live in the private repo [giacomoran/obsidian-setup](https://github.com/giacomoran/obsidian-setup), checked out into the vault on both the Mac and epsilon. It's a bare repo in `~/.obsidian-setup` with the vault as its work tree, like the Mac's dotfiles; the `obsidian-setup` fish alias runs git on it.
+
+Setting it up, on epsilon after `gh auth login`:
+
+```sh
+git clone --bare git@github.com:giacomoran/obsidian-setup.git ~/.obsidian-setup
+obsidian-setup config status.showUntrackedFiles no
+obsidian-setup config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+obsidian-setup checkout main
+cd ~/Obsidian/giacomo/.scripts && uv sync
+```
+
+### Relay
+
+The shared folders in `🛰️ Relay` sync through [relay-cli](https://github.com/No-Instructions/relay-cli) (`rmd`), Relay's headless client; `relay.service` runs its daemon. relay-cli is young (pinned in `bootstrap.sh`), and the Relay sync engine it bundles (0.8.12) has open bugs with edits made on disk: agents shouldn't rename or move files there, or edit emoji, until a newer release ships. Each folder keeps its state in `.relay/`, and remote deletions land in `.relay/trash/`.
+
+Setting it up (`bootstrap.sh` installs `rmd` and the service), interactively on epsilon:
+
+```sh
+rmd login --provider github --no-open   # open the printed URL on the Mac
+rmd relays && rmd folders               # the guids of each relay and shared folder
+rmd clone "$HOME/Obsidian/giacomo/🛰️ Relay/<Name>" --relay <relay guid> --folder <folder guid>   # for each folder, into an empty directory
+systemctl --user enable --now relay.service
+```
+
+`rmd` keeps its login in `~/.local/state/rmd/`, encrypted with `storage.key` there (backed up).
+
+### qmd
+
+[qmd](https://github.com/tobi/qmd) is the vault's search engine for agents (see `👾 Wiki/CLAUDE.md`), with the same collections as on the Mac (`config/qmd/index.yml`): the wiki, web and video sources, work notes, and `sources-docs`, the PDFs in `📘 Sources - Docs` converted to markdown in `~/.cache/qmd-pdf/sources-docs`. `qmd-update.timer` re-indexes every 15 minutes, so notes edited on the Mac show up in searches; agents can also run `qmd update` after editing. `qmd` runs outside the Claude Code sandbox (`excludedCommands` in `~/.claude/settings.json`), as on the Mac.
+
+epsilon's PDF converter has no OCR: the Mac's runs PaddleOCR-VL on MLX, which needs Metal. Pages without a text layer are left out here. The Mac's sidecars (OCR included) are copied over once instead, which also covers the large PDFs that Obsidian Sync doesn't bring to epsilon; sidecars are only rewritten when their PDF changes.
+
+Setting it up (`bootstrap.sh` installs qmd, its config, the converter and the timer), from the Mac:
+
+```sh
+rsync -a ~/.cache/qmd-pdf/sources-docs/ epsilon:.cache/qmd-pdf/sources-docs/
+ssh epsilon 'qmd update && qmd embed'   # the first embed downloads ~2 GB of models
+ssh epsilon 'systemctl --user enable --now qmd-update.timer'
+```
 
 ## Backups
 

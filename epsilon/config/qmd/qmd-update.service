@@ -1,0 +1,11 @@
+[Unit]
+Description=Re-index the Obsidian vault with qmd
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h
+# Runs the sources-docs update hook too, which converts new PDFs
+ExecStart=%h/.local/share/mise/shims/qmd update
+ExecStart=%h/.local/share/mise/shims/qmd embed
+# Leave the CPU to agents and dev servers
+Nice=10
