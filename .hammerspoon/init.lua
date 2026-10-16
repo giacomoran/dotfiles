@@ -1,1 +1,2 @@
 require "kmonad"
+require "spacemouse"
