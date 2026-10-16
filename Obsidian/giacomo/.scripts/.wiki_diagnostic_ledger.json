@@ -1,0 +1,415 @@
+{
+  "issues": {
+    "62d3bd4dc65a5b53d68789b24b47cf3448d24bf35c4a2ff9b356385e3f16c1e4": {
+      "claim_fragment": "Power transformer lead times have extended to 2-4 years and are a critical bottleneck for grid expansion and electrification.",
+      "first_reported_at": "2026-06-24T11:07:23Z",
+      "invalidated_at": "2026-06-24T11:14:16Z",
+      "invalidated_by": [
+        "Power transformer manufacturing lead times have extended to 2-4 years creating a critical bottleneck for grid expansion and electrification",
+        "Power transformers are the rate-limiting component in grid expansion due to 2-4 year manufacturing lead times"
+      ],
+      "issue_type": "duplicate-claim",
+      "last_reported_at": "2026-06-24T11:07:23Z",
+      "note_timestamps": {
+        "Power transformer manufacturing lead times have extended to 2-4 years creating a critical bottleneck for grid expansion and electrification": {
+          "updated_at": "2026-06-22T07:46:23.445053Z",
+          "updated_at_ns": 1782114383445052979
+        },
+        "Power transformers are the rate-limiting component in grid expansion due to 2-4 year manufacturing lead times": {
+          "updated_at": "2026-06-22T07:34:19.262461Z",
+          "updated_at_ns": 1782113659262461192
+        }
+      },
+      "notes": [
+        "Power transformer manufacturing lead times have extended to 2-4 years creating a critical bottleneck for grid expansion and electrification",
+        "Power transformers are the rate-limiting component in grid expansion due to 2-4 year manufacturing lead times"
+      ],
+      "previous_status": "reported",
+      "status": "invalidated",
+      "summary": "Two power-transformer notes assert the same 2-4 year manufacturing lead-time bottleneck with overlapping causes, supply constraints, and grid-expansion implications."
+    },
+    "83d600c19dd21fd03c30fe0d3d688139ad87ac8f4ed07a56f1b0a34cd76ab365": {
+      "claim_fragment": "hydrogen storage lets electrolyzers vary cheap electricity intake while decoupling downstream output",
+      "first_reported_at": "2026-06-24T09:49:30Z",
+      "invalidated_at": "2026-06-24T10:04:51Z",
+      "invalidated_by": [
+        "Electrolysis supports intermittent power because hydrogen storage decouples electricity intake from product offtake",
+        "Electrolyzers are the ideal industrial demand-response asset because hydrogen storage decouples electricity consumption from production output"
+      ],
+      "issue_type": "duplicate-claim",
+      "last_reported_at": "2026-06-24T09:49:30Z",
+      "note_timestamps": {
+        "Electrolysis supports intermittent power because hydrogen storage decouples electricity intake from product offtake": {
+          "updated_at": "2026-06-24T09:34:42.695552Z",
+          "updated_at_ns": 1782293682695552049
+        },
+        "Electrolyzers are the ideal industrial demand-response asset because hydrogen storage decouples electricity consumption from production output": {
+          "updated_at": "2026-06-21T17:52:01.691176Z",
+          "updated_at_ns": 1782064321691175932
+        }
+      },
+      "notes": [
+        "Electrolysis supports intermittent power because hydrogen storage decouples electricity intake from product offtake",
+        "Electrolyzers are the ideal industrial demand-response asset because hydrogen storage decouples electricity consumption from production output"
+      ],
+      "previous_status": "reported",
+      "status": "invalidated",
+      "summary": "Two notes assert the same electrolyzer/hydrogen-storage decoupling mechanism; one should probably absorb the demand-response economics or the titles should be separated more sharply."
+    },
+    "a3c4aa17ee8d7974eedd5bf5a1a22febe99a663f606f0c7c7a9b28b62baf48b6": {
+      "claim_fragment": "source note frames binding robot deployment labor as white-collar expertise while extracted atomic note frames cheap floor labor",
+      "first_reported_at": "2026-06-24T10:11:58Z",
+      "invalidated_at": "2026-06-24T10:59:05Z",
+      "invalidated_by": [
+        "@chris_j_paxton, 2026 - you still need cheap workers alongside robots",
+        "Robot deployments still require cheap blue collar labor running alongside automation"
+      ],
+      "issue_type": "contradiction",
+      "last_reported_at": "2026-06-24T10:11:58Z",
+      "note_timestamps": {
+        "@chris_j_paxton, 2026 - you still need cheap workers alongside robots": {
+          "updated_at": "2026-05-06T12:46:23.411500Z",
+          "updated_at_ns": 1778071583411500239
+        },
+        "Robot deployments still require cheap blue collar labor running alongside automation": {
+          "updated_at": "2026-05-06T12:48:56.017144Z",
+          "updated_at_ns": 1778071736017143912
+        }
+      },
+      "notes": [
+        "@chris_j_paxton, 2026 - you still need cheap workers alongside robots",
+        "Robot deployments still require cheap blue collar labor running alongside automation"
+      ],
+      "previous_status": "reported",
+      "status": "invalidated",
+      "summary": "The source note's take says the binding deployment cost is white-collar expertise overhead, while the extracted atomic note says cheap floor labor handles residual tasks alongside the robot."
+    },
+    "a41813e40b591579538ad95f155145a02945bfe67a7fd54fb71fdea65824f137": {
+      "claim_fragment": "EU solar additions were 56 GW in 2023 and 65.5 GW in 2024, so the title's exceeded-60-GW claim is false for 2023.",
+      "first_reported_at": "2026-06-24T11:07:38Z",
+      "invalidated_at": "2026-06-24T11:14:16Z",
+      "invalidated_by": [
+        "EU solar additions exceeded 60 GW per year in 2023 and 2024"
+      ],
+      "issue_type": "stale-factual-surface",
+      "last_reported_at": "2026-06-24T11:07:38Z",
+      "note_timestamps": {
+        "EU solar additions exceeded 60 GW per year in 2023 and 2024": {
+          "updated_at": "2026-06-21T12:15:15.800123Z",
+          "updated_at_ns": 1782044115800122762
+        }
+      },
+      "notes": [
+        "EU solar additions exceeded 60 GW per year in 2023 and 2024"
+      ],
+      "previous_status": "reported",
+      "status": "invalidated",
+      "summary": "The EU solar note title says additions exceeded 60 GW per year in both 2023 and 2024, but the body gives 56 GW for 2023 and 65.5 GW for 2024."
+    },
+    "ab7e65cf415f0cad5db125bfa9c35a4e85dd1d6d7d0f9c41503a12f9b06df475": {
+      "claim_fragment": "HVDC title claims more than 20 GW of cross-border capacity by 2030 while the body lists internal projects and visible listed cross-border projects do not support that total",
+      "first_reported_at": "2026-06-24T10:11:52Z",
+      "invalidated_at": "2026-06-24T10:50:59Z",
+      "invalidated_by": [
+        "Major European HVDC interconnector projects will add more than 20 GW of cross-border capacity by 2030"
+      ],
+      "issue_type": "contradiction",
+      "last_reported_at": "2026-06-24T10:11:52Z",
+      "note_timestamps": {
+        "Major European HVDC interconnector projects will add more than 20 GW of cross-border capacity by 2030": {
+          "updated_at": "2026-06-21T19:10:00.717882Z",
+          "updated_at_ns": 1782069000717882402
+        }
+      },
+      "notes": [
+        "Major European HVDC interconnector projects will add more than 20 GW of cross-border capacity by 2030"
+      ],
+      "previous_status": "reported",
+      "status": "invalidated",
+      "summary": "The note title/body scope appears inconsistent: the body cites ENTSO-E system-wide capacity figures, but the listed HVDC projects mix cross-border and internal links and do not visibly add to more than 20 GW cross-border by 2030."
+    },
+    "b808b69f047b23293d056e4e526d55ecc62c89839e3522f8fc9dcdef372ce931": {
+      "claim_fragment": "Dutch BV dividends to a Delaware parent are subject to statutory 15 percent withholding but treaty-reduced to 5 percent when the parent owns enough of the BV.",
+      "first_reported_at": "2026-06-24T11:07:38Z",
+      "invalidated_at": "2026-06-24T11:14:16Z",
+      "invalidated_by": [
+        "Dutch founders face a 15% dividend withholding tax on payments from Dutch BV to Delaware parent that did not apply before the flip"
+      ],
+      "issue_type": "stale-factual-surface",
+      "last_reported_at": "2026-06-24T11:07:38Z",
+      "note_timestamps": {
+        "Dutch founders face a 15% dividend withholding tax on payments from Dutch BV to Delaware parent that did not apply before the flip": {
+          "updated_at": "2026-05-11T12:48:52.918814Z",
+          "updated_at_ns": 1778503732918814189
+        },
+        "US-EU tax treaties reduce withholding tax on dividends, interest, and royalties below the 30% statutory default": {
+          "updated_at": "2026-05-11T12:35:15.101326Z",
+          "updated_at_ns": 1778502915101326304
+        }
+      },
+      "notes": [
+        "Dutch founders face a 15% dividend withholding tax on payments from Dutch BV to Delaware parent that did not apply before the flip",
+        "US-EU tax treaties reduce withholding tax on dividends, interest, and royalties below the 30% statutory default"
+      ],
+      "previous_status": "reported",
+      "status": "invalidated",
+      "summary": "The Dutch founder note title states a 15% withholding tax, while its body and the treaty note state the post-flip dividend drag is treaty-reduced to 5% for a qualifying Delaware parent."
+    },
+    "f8ded7afeb051cc1da30066d28cee3a253f1a53628b4682cc527ec1acb916f1b": {
+      "claim_fragment": "aggregate dexterous hand note ends with a bare linked notes list instead of carrying relationships inline",
+      "first_reported_at": "2026-06-24T10:12:05Z",
+      "invalidated_at": "2026-06-24T10:50:59Z",
+      "invalidated_by": [
+        "Dexterous hand retail price spans $714-$20k across commodity-servo, precision-mechanism, worm-gear, and vertically-integrated architectures"
+      ],
+      "issue_type": "link-prose-redundancy",
+      "last_reported_at": "2026-06-24T10:12:05Z",
+      "note_timestamps": {
+        "Dexterous hand retail price spans $714-$20k across commodity-servo, precision-mechanism, worm-gear, and vertically-integrated architectures": {
+          "updated_at": "2026-06-16T10:04:29.650619Z",
+          "updated_at_ns": 1781604269650619037
+        }
+      },
+      "notes": [
+        "Dexterous hand retail price spans $714-$20k across commodity-servo, precision-mechanism, worm-gear, and vertically-integrated architectures"
+      ],
+      "previous_status": "reported",
+      "status": "invalidated",
+      "summary": "The aggregate dexterous-hand price note has a trailing Notes list of component notes, duplicating relationships that should be expressed inline or removed."
+    }
+  },
+  "note_audits": {
+    "China's April 2025 rare earth export controls caused a 75% drop in magnet shipments to Europe within weeks": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/China's April 2025 rare earth export controls caused a 75% drop in magnet shipments to Europe within weeks.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-16T10:04:29.812246Z",
+      "updated_at_ns": 1781604269812245964
+    },
+    "Commodity decarbonization scales only when the green product beats incumbent cost": {
+      "audited_at": "2026-06-24T09:49:43Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Commodity decarbonization scales only when the green product beats incumbent cost.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T09:30:37.948167Z",
+      "updated_at_ns": 1782293437948166770
+    },
+    "Company Profile - Hera": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Company Profile - Hera.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-15T14:15:52.990653Z",
+      "updated_at_ns": 1781532952990653029
+    },
+    "Company Profile - Nexans": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Company Profile - Nexans.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T10:42:03.456888Z",
+      "updated_at_ns": 1782297723456887953
+    },
+    "Control over deployed hardware plus data rights is more defensible than software alone": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Control over deployed hardware plus data rights is more defensible than software alone.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-16T20:57:04.103069Z",
+      "updated_at_ns": 1781643424103068751
+    },
+    "Copper demand for grid electrification is growing faster than mine supply creating a structural scarcity risk through the 2030s": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Copper demand for grid electrification is growing faster than mine supply creating a structural scarcity risk through the 2030s.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-22T19:42:54.112707Z",
+      "updated_at_ns": 1782157374112706766
+    },
+    "Dutch founders face a 15% dividend withholding tax on payments from Dutch BV to Delaware parent that did not apply before the flip": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Dutch founders face a 15% dividend withholding tax on payments from Dutch BV to Delaware parent that did not apply before the flip.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-11T12:48:52.918814Z",
+      "updated_at_ns": 1778503732918814189
+    },
+    "EU solar additions exceeded 60 GW per year in 2023 and 2024": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/EU solar additions exceeded 60 GW per year in 2023 and 2024.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-21T12:15:15.800123Z",
+      "updated_at_ns": 1782044115800122762
+    },
+    "France's nuclear waste bottleneck is long-lived disposal capacity rather than short-lived waste routing": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/France's nuclear waste bottleneck is long-lived disposal capacity rather than short-lived waste routing.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T11:05:35.395957Z",
+      "updated_at_ns": 1782299135395957457
+    },
+    "GPU throttling turns power shortfalls into token-rate degradation rather than binary downtime": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/GPU throttling turns power shortfalls into token-rate degradation rather than binary downtime.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T09:40:07.587981Z",
+      "updated_at_ns": 1782294007587980547
+    },
+    "Gas covers roughly 20% of EU total final energy but over 30% of household and industrial consumption where heating and process heat dominate": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Gas covers roughly 20% of EU total final energy but over 30% of household and industrial consumption where heating and process heat dominate.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-21T12:17:41.734698Z",
+      "updated_at_ns": 1782044261734697625
+    },
+    "Germany's Energiewende exit from nuclear shifted its baseload to gas and coal while renewables scaled": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Germany's Energiewende exit from nuclear shifted its baseload to gas and coal while renewables scaled.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-21T11:43:43.861572Z",
+      "updated_at_ns": 1782042223861572187
+    },
+    "Handmer, 2024 - Solar and batteries for generic use cases": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Handmer, 2024 - Solar and batteries for generic use cases.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T09:49:40.725155Z",
+      "updated_at_ns": 1782294580725154697
+    },
+    "Hard tech must reach positive unit economics at pilot scale before scaling": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Hard tech must reach positive unit economics at pilot scale before scaling.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-03T20:40:05.817275Z",
+      "updated_at_ns": 1777840805817274693
+    },
+    "High inflation is undesirable because it turns money prices into unreliable planning signals": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/High inflation is undesirable because it turns money prices into unreliable planning signals.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T10:57:30.766073Z",
+      "updated_at_ns": 1782298650766073429
+    },
+    "Humanoid-specific safety standards are emerging but address fall dynamics and joint forces, not learned policy behavior": {
+      "audited_at": "2026-06-24T09:49:39Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Humanoid-specific safety standards are emerging but address fall dynamics and joint forces, not learned policy behavior.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-03T20:40:05.909608Z",
+      "updated_at_ns": 1777840805909608005
+    },
+    "Industrial robots follow a ~30% experience curve rate at the unit level, decelerating post-2017": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Industrial robots follow a ~30% experience curve rate at the unit level, decelerating post-2017.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-03T20:40:05.876445Z",
+      "updated_at_ns": 1777840805876444555
+    },
+    "Ion-adsorption clay deposits are the dominant commercial source of heavy rare earths": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Ion-adsorption clay deposits are the dominant commercial source of heavy rare earths.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-03T18:50:11.315130Z",
+      "updated_at_ns": 1780512611315130545
+    },
+    "LEAP Hand costs $714-$1,772 with actuators at 54-81% of BOM depending on servo tier": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/LEAP Hand costs $714-$1,772 with actuators at 54-81% of BOM depending on servo tier.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-06T09:03:59.567354Z",
+      "updated_at_ns": 1778058239567354117
+    },
+    "Legal Entity - US LLC": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Legal Entity - US LLC.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-18T09:31:26.602644Z",
+      "updated_at_ns": 1779096686602644428
+    },
+    "Levine, 2024 - The Promise of Generalist Robotic Policies": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Levine, 2024 - The Promise of Generalist Robotic Policies.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-16T20:56:03.925810Z",
+      "updated_at_ns": 1781643363925809897
+    },
+    "MIIT rare earth quotas are the binding administrative throttle on Chinese supply, allocated to two state-owned giants": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/MIIT rare earth quotas are the binding administrative throttle on Chinese supply, allocated to two state-owned giants.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-16T10:04:29.617414Z",
+      "updated_at_ns": 1781604269617413735
+    },
+    "Major European HVDC interconnector projects will add more than 20 GW of cross-border capacity by 2030": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Major European HVDC interconnector projects will add more than 20 GW of cross-border capacity by 2030.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-21T19:10:00.717882Z",
+      "updated_at_ns": 1782069000717882402
+    },
+    "No harmonized standard under EU Machinery Regulation 2023-1230 yet bounds a learned policy to a safety integrity level": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/No harmonized standard under EU Machinery Regulation 2023-1230 yet bounds a learned policy to a safety integrity level.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-18T19:43:28.606870Z",
+      "updated_at_ns": 1781811808606870021
+    },
+    "RESourceEU repackages existing EU instruments toward CRM rather than committing new fiscal capacity": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/RESourceEU repackages existing EU instruments toward CRM rather than committing new fiscal capacity.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-06T10:26:30.312813Z",
+      "updated_at_ns": 1778063190312813132
+    },
+    "Reprocessed uranium is France's sharpest Russia-linked nuclear fuel bottleneck": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Reprocessed uranium is France's sharpest Russia-linked nuclear fuel bottleneck.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T11:07:13.040110Z",
+      "updated_at_ns": 1782299233040110066
+    },
+    "Robot deployments require white-collar expertise overhead even when robots reduce floor labor": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Robot deployments require white-collar expertise overhead even when robots reduce floor labor.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T11:05:42.753020Z",
+      "updated_at_ns": 1782299142753019931
+    },
+    "Robot deployments still require cheap blue collar labor running alongside automation": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Robot deployments still require cheap blue collar labor running alongside automation.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-06T12:48:56.017144Z",
+      "updated_at_ns": 1778071736017143912
+    },
+    "Switchgear is the switching and protection layer around grid circuits": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Switchgear is the switching and protection layer around grid circuits.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-24T10:51:02.575433Z",
+      "updated_at_ns": 1782298262575433558
+    },
+    "The Red Hat playbook captures value from operating and guaranteeing open-source software, not from licensing it": {
+      "audited_at": "2026-06-24T09:49:34Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/The Red Hat playbook captures value from operating and guaranteeing open-source software, not from licensing it.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-17T13:10:13.681435Z",
+      "updated_at_ns": 1781701813681434971
+    },
+    "The notary profession is structurally insulated from competition by territorial monopoly and state-set pricing": {
+      "audited_at": "2026-06-24T10:12:15Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/The notary profession is structurally insulated from competition by territorial monopoly and state-set pricing.md",
+      "strategy": "mixed",
+      "updated_at": "2026-06-18T21:13:26.525862Z",
+      "updated_at_ns": 1781817206525862493
+    },
+    "Traditional industrial arm production is 700k-850k-1M units per year by 2030": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Traditional industrial arm production is 700k-850k-1M units per year by 2030.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-03T20:40:05.898086Z",
+      "updated_at_ns": 1777840805898085925
+    },
+    "Vertical integration in contested commodity supply chains is a survival strategy against margin volatility and foreign chokepoints": {
+      "audited_at": "2026-06-24T11:07:50Z",
+      "path": "/Users/giacomoran/Obsidian/giacomo/\ud83d\udc7e Wiki/Vertical integration in contested commodity supply chains is a survival strategy against margin volatility and foreign chokepoints.md",
+      "strategy": "mixed",
+      "updated_at": "2026-05-03T20:40:05.852043Z",
+      "updated_at_ns": 1777840805852043352
+    }
+  },
+  "schema": 1
+}

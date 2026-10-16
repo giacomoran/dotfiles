@@ -435,6 +435,13 @@ function render() {
 
 // ── Actions ───────────────────────────────────────────────────────────────────
 
+// Advance index past images that already have a decision (skipped or downloaded).
+function advanceToNext() {
+  while (index < images.length && decisions[images[index].id]) {
+    index++;
+  }
+}
+
 function go(delta) {
   index = Math.max(0, Math.min(images.length - 1, index + delta));
   render();
@@ -447,6 +454,7 @@ function skip() {
     pywebview.api.save_skip(img.id); // fire-and-forget
   }
   index++;
+  advanceToNext();
   render();
 }
 
@@ -461,6 +469,7 @@ async function download() {
   if (result.ok) {
     decisions[img.id] = { status: "downloaded", label: `✓ ${result.saved_as}` };
     index++;
+    advanceToNext();
   } else {
     decisions[img.id] = { status: "error", label: `✗ ${result.error}` };
   }

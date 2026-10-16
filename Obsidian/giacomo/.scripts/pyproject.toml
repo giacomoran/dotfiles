@@ -5,7 +5,10 @@ description = "Scripts for working on Giacomo's Obsidian vault"
 requires-python = ">=3.13"
 dependencies = [
     "mlx-whisper>=0.4.0",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.2",
     "pillow>=12.2.0",
+    "plotnine>=0.15.3",
     "pywebview>=6.1",
     "requests>=2.33.1",
     "whisperx>=3.1.0",

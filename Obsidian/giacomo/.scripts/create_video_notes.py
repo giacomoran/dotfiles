@@ -8,6 +8,7 @@ speaker-diarized transcript. Press Skip to leave the link as-is. Navigate back
 with ←.
 """
 
+import argparse
 import getpass
 import json
 import os
@@ -174,8 +175,10 @@ def fetch_metadata(url: str) -> dict:
 
 
 def download_audio(url: str, dest_dir: Path) -> Path:
-    # whisperx.load_audio handles resampling; just get the best available audio
-    _run_ytdlp(["--no-playlist", "-f", "bestaudio",
+    # whisperx.load_audio handles resampling; just get the best available audio.
+    # Plain "bestaudio" can resolve to a stream YouTube gates behind a PO token,
+    # which then 403s; prefer progressive https formats and fall back to 140 (m4a).
+    _run_ytdlp(["--no-playlist", "-f", "bestaudio[protocol^=http]/140/bestaudio",
                 "--extract-audio", "--audio-format", "wav",
                 "-o", str(dest_dir / "audio.%(ext)s"), url])
     return dest_dir / "audio.wav"
@@ -781,7 +784,37 @@ window.addEventListener("pywebviewready", init);
 
 # ── Entry point ───────────────────────────────────────────────────────────────
 
+def create_from_url(url: str) -> None:
+    """Download, transcribe, and write a note for a single URL without the GUI."""
+    video_id = extract_video_id(url)
+    assert video_id, f"Could not extract a YouTube video ID from: {url}"
+
+    hf_token = load_hf_token()
+
+    print("Fetching metadata…")
+    metadata = fetch_metadata(canonical_url(video_id))
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        print("Downloading audio…")
+        audio_path = download_audio(canonical_url(video_id), tmp_path)
+        print("Transcribing…")
+        transcript = transcribe_audio(audio_path, hf_token)
+
+    print("Writing note…")
+    note_path = write_note(video_id, metadata, transcript)
+    print(f"Created: {note_path.relative_to(VAULT_PATH)}")
+
+
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Create Obsidian notes for YouTube videos.")
+    parser.add_argument("url", nargs="?", help="YouTube URL to process directly (skips the GUI)")
+    args = parser.parse_args()
+
+    if args.url:
+        create_from_url(args.url)
+        return
+
     hf_token = load_hf_token()
     print("Scanning vault for YouTube links…")
     videos = find_youtube_links(VAULT_PATH)
