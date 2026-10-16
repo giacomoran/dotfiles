@@ -306,6 +306,7 @@
   "remote.SSH.defaultShell": "/bin/bash",
   "remote.SSH.remotePlatform": {
     "zeta": "linux",
-    "filipporan-pc": "linux"
+    "filipporan-pc": "linux",
   },
+  "python.languageServer": "Default",
 }

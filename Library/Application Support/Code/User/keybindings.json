@@ -55,6 +55,17 @@
     "command": "workbench.action.moveEditorToPreviousGroup",
     "when": "editorFocus"
   },
+  // #: Markdown
+  // [⇧]+[⌘]+[v] Paste instead of markdown preview (muscle memory says plain-text paste)
+  {
+    "key": "shift+cmd+v",
+    "command": "-markdown.togglePreview"
+  },
+  {
+    "key": "shift+cmd+v",
+    "command": "editor.action.clipboardPasteAction",
+    "when": "editorTextFocus"
+  },
   // #: Explorer
   {
     "key": "shift+cmd+b",
