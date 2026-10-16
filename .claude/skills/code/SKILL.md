@@ -4,6 +4,8 @@ description: >
   Coding conventions and guidelines. Load this skill whenever reading or writing code.
 ---
 
+Ask me before committing. Don't commit on my behalf unless I explicitly agree.
+
 ## Naming Conventions
 
 Two subagents are available for naming convention work:
