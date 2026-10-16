@@ -122,7 +122,7 @@ systemctl --user enable --now obsidian-sync.service
 
 ### obsidian-setup
 
-The vault's dot-folders don't sync through Obsidian Sync, so its scripts (`.scripts/`), Claude Code settings and project skills (`.claude/`) live in the private repo [giacomoran/obsidian-setup](https://github.com/giacomoran/obsidian-setup), checked out into the vault on both the Mac and epsilon. It's a bare repo in `~/.obsidian-setup` with the vault as its work tree, like the Mac's dotfiles; the `obsidian-setup` fish alias runs git on it.
+The vault's dot-folders don't sync through Obsidian Sync, so its scripts (`.scripts/`), Claude Code settings and project skills (`.claude/`), and the headless stand-in for the Obsidian CLI (`.obsidian-cli-custom/`, linked as `~/.local/bin/obsidian` by `bootstrap.sh`, since the official CLI needs the app running) live in the private repo [giacomoran/obsidian-setup](https://github.com/giacomoran/obsidian-setup), checked out into the vault on both the Mac and epsilon. It's a bare repo in `~/.obsidian-setup` with the vault as its work tree, like the Mac's dotfiles; the `obsidian-setup` fish alias runs git on it.
 
 Setting it up, on epsilon after `gh auth login`:
 

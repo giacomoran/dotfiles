@@ -100,6 +100,11 @@ mkdir -p ~/.config/systemd/user ~/Obsidian/giacomo
 cp "$SCRIPT_DIR/config/systemd/obsidian-sync.service" ~/.config/systemd/user/
 systemctl --user daemon-reload
 
+# Put the headless stand-in for the Obsidian CLI on PATH, so agent skills calling `obsidian rename`
+# etc. work without the app. It comes from the obsidian-setup checkout in the vault (see
+# README.md), so the link dangles until that is cloned
+ln -sf ~/Obsidian/giacomo/.obsidian-cli-custom/obsidian.py ~/.local/bin/obsidian
+
 # Install relay-cli (rmd), which syncs the vault's Relay shared folders without the app. Pinned,
 # since it is young and runs Relay's sync engine on files agents edit. Its service needs a
 # login and clones first (see README.md), so it is only installed here, not enabled
