@@ -50,6 +50,7 @@ Unlike `general/`, there is no `cloud-init.yaml`: the OS was installed by hand f
    ```
 
 7. Set up backups, see [Backups](#backups).
+8. Set up the Obsidian vault, see [Obsidian](#obsidian).
 
 ## Dev servers
 
@@ -58,6 +59,22 @@ Start them with `--host` (e.g. `pnpm dev --host`) and open `http://epsilon:<port
 T3 browser tabs in an epsilon project also reach `localhost` on epsilon, but they stream a headless Chrome and feel laggy; they suit agents checking their own work.
 
 Docker's published ports bypass `ufw`: publish them on `127.0.0.1` only.
+
+## Obsidian
+
+The vault lives in `~/Obsidian/giacomo`, so agents on epsilon can work on it. [Obsidian Headless](https://obsidian.md/help/sync/headless) (`ob`) syncs it through Obsidian Sync without the app, as one more Sync device; `obsidian-sync.service` runs `ob sync --continuous`. Plugins don't run, so the Relay folders only update through Obsidian Sync, and dot-folders like `.claude/` don't sync at all.
+
+Setting it up (`bootstrap.sh` installs `ob` and the service), interactively on epsilon:
+
+```sh
+ob login
+ob sync-list-remote   # shows the remote vault's name
+ob sync-setup --vault <name> --path ~/Obsidian/giacomo --device-name epsilon
+ob sync --path ~/Obsidian/giacomo
+systemctl --user enable --now obsidian-sync.service
+```
+
+`sync-setup` asks for the vault's end-to-end encryption password, if it has one. The first `ob sync` downloads the whole vault; the service takes over from there.
 
 ## Backups
 

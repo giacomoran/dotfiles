@@ -1,0 +1,12 @@
+[Unit]
+Description=Obsidian Sync for ~/Obsidian/giacomo (Obsidian Headless)
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h
+ExecStart=%h/.local/share/mise/shims/ob sync --continuous --path %h/Obsidian/giacomo
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=default.target

@@ -78,6 +78,15 @@ fi
 ~/.local/bin/mise exec -- npm install --global @openai/codex
 ~/.local/bin/mise reshim
 
+# Install Obsidian Headless, which syncs the vault through Obsidian Sync without the app.
+# Its SQLite dependency needs its install script, which npm blocks by default.
+~/.local/bin/mise exec -- npm install --global --allow-scripts=better-sqlite3 obsidian-headless
+~/.local/bin/mise reshim
+# The service needs a login first (see README.md), so it is only installed here, not enabled
+mkdir -p ~/.config/systemd/user ~/Obsidian/giacomo
+cp "$SCRIPT_DIR/config/systemd/obsidian-sync.service" ~/.config/systemd/user/
+systemctl --user daemon-reload
+
 # Install T3 Code and run it as a user service that starts at boot
 if [ ! -x ~/.local/bin/t3 ]; then
     curl -fsSL https://t3.codes/install.sh | sh
