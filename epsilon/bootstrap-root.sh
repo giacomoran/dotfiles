@@ -97,6 +97,11 @@ loginctl enable-linger "$USERNAME"
 # Let giacomoran manage `tailscale serve` without sudo, which `t3 pair --tailscale` needs
 tailscale set --operator="$USERNAME"
 
+# Let MuJoCo render headless on the integrated GPU (ai-saldatura's cameras): EGL and GL from
+# Mesa, and the render group for /dev/dri/renderD128
+apt-get install -y libegl1 libegl-mesa0 libgl1 libgles2 libopengl0 mesa-libgallium
+usermod -aG render "$USERNAME"
+
 # Use the AMD hardware watchdog: systemd pings it, and if the kernel hangs the board resets.
 # Ubuntu blacklists the driver, and both systemd-modules-load and the initramfs honor the blacklist,
 # while a plain `modprobe sp5100_tco` doesn't. systemd only looks for a watchdog early in boot, so

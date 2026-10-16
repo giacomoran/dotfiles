@@ -18,6 +18,15 @@ fish_add_path --global ~/.local/share/mise/shims
 # (same value as ~/.config/environment.d/999-dev-servers.conf, which covers T3 Code)
 set -gx __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS epsilon,epsilon.tail52f04e.ts.net
 
+# Make MuJoCo render through EGL, since there is no display
+# (same value as ~/.config/environment.d/999-mujoco.conf, which covers T3 Code)
+set -gx MUJOCO_GL egl
+
+# Make glibc hand freed memory back to the system
+# (same values as ~/.config/environment.d/999-malloc.conf, which covers T3 Code)
+set -gx MALLOC_ARENA_MAX 2
+set -gx MALLOC_TRIM_THRESHOLD_ 65536
+
 # Use `less` as default pager
 # See below for configuration options
 set -gx PAGER less

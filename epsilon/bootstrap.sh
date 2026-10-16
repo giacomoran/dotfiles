@@ -52,6 +52,18 @@ cat > ~/.config/environment.d/999-dev-servers.conf <<'EOF'
 __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS=epsilon,epsilon.tail52f04e.ts.net
 EOF
 
+# Make MuJoCo render through EGL, since there is no display (ai-saldatura's cameras)
+cat > ~/.config/environment.d/999-mujoco.conf <<'EOF'
+MUJOCO_GL=egl
+EOF
+
+# Make glibc hand freed memory back to the system. By default a long-lived process keeps its
+# peak, so ai-saldatura's 16 pytest workers each grew to 8-9 GB and earlyoom killed them.
+cat > ~/.config/environment.d/999-malloc.conf <<'EOF'
+MALLOC_ARENA_MAX=2
+MALLOC_TRIM_THRESHOLD_=65536
+EOF
+
 # Install uv (Python versions and environments)
 if [ ! -x ~/.local/bin/uv ]; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
