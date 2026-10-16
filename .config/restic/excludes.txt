@@ -1,0 +1,86 @@
+# System
+.Trash
+.Spotlight-V100
+.fseventsd
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Caches
+Library/Caches
+.cache
+*.log
+
+# Development
+node_modules
+.npm
+.yarn
+.pnpm-store
+vendor/bundle
+.gradle
+.m2
+target/
+build/
+dist/
+*.pyc
+__pycache__
+.venv
+venv/
+.tox
+
+# Large app data (re-downloadable)
+Library/Application Support/Steam
+Library/Application Support/Discord/Cache
+Library/Application Support/Slack/Cache
+Library/Application Support/Code/CachedData
+Library/Application Support/Google/Chrome/Default/Service Worker
+Library/Containers/com.docker.docker
+
+# Other
+.dropbox.cache
+*.vmdk
+*.iso
+
+# OrbStack (sparse disk image)
+Library/Containers/**/data.img.raw
+
+# MacDroid (Android phone filesystem via USB — times out when phone disconnected)
+Library/CloudStorage/MacDroid-*
+
+# LLM models (re-downloadable)
+.ollama/models
+Zxtra/llm-local/models
+Zxtra/imagegen/Fooocus/models
+
+# Android SDK (re-downloadable)
+Library/Android/sdk/system-images
+
+# macOS protected (no read permission)
+Library/Group Containers/group.com.apple.secure-control-center-preferences
+
+# macOS protected (synced via iCloud)
+Library/Accounts
+Library/AppleMediaServices
+Library/Application Support/AddressBook
+Library/Application Support/CallHistoryDB
+Library/Application Support/CallHistoryTransactions
+Library/Application Support/CloudDocs
+Library/Application Support/FaceTime
+Library/Application Support/MobileSync
+Library/Application Support/com.apple.TCC
+Library/Calendars
+Library/Cookies
+Library/HomeKit
+Library/IdentityServices
+Library/Mail
+Library/Messages
+Library/Safari
+Library/Suggestions
+Library/PersonalizationPortrait
+Library/Metadata/CoreSpotlight
+Library/DuetExpertCenter
+Library/Application Support/Knowledge
+Library/Application Support/DifferentialPrivacy
+Library/Application Support/FileProvider
+Library/Application Support/com.apple.avfoundation
